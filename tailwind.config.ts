@@ -58,10 +58,15 @@ export default {
           ring: "hsl(var(--sidebar-ring))",
         },
       },
+      fontFamily: {
+        display: ["var(--font-display)", "sans-serif"],
+        serif: ["var(--font-serif)", "serif"],
+        sans: ["var(--font-sans)", "sans-serif"],
+      },
       borderRadius: {
         lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        md: "var(--radius)",
+        sm: "var(--radius)",
       },
       keyframes: {
         "accordion-down": {
