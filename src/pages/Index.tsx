@@ -6,7 +6,7 @@ export default function Index() {
   return (
     <div className="bg-background min-h-screen">
       <Nav />
-      <main className="pt-16">
+      <main className="pt-20">
         <Hero />
       </main>
     </div>
