@@ -59,9 +59,9 @@ export default {
         },
       },
       fontFamily: {
-        display: ["var(--font-display)", "sans-serif"],
-        serif: ["var(--font-serif)", "serif"],
-        sans: ["var(--font-sans)", "sans-serif"],
+        display: ["'Bodoni Moda'", "serif"],
+        serif: ["'Cormorant Garamond'", "serif"],
+        sans: ["'Montserrat'", "sans-serif"],
       },
       borderRadius: {
         lg: "var(--radius)",

@@ -1,12 +1,11 @@
-import { useMemo, useState } from "react";
+import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
-import { heroImages } from "@/data/portfolio";
+import { motion } from "framer-motion";
+import { heroPool } from "@/data/portfolio";
 
-// Seeded shuffle so it changes on each reload (based on timestamp)
-function shuffleArray<T>(arr: T[]): T[] {
+// Seeded random shuffle using current timestamp so it changes each reload
+function seededShuffle<T>(arr: T[]): T[] {
   const a = [...arr];
-  // Use date-based seed so it changes each time
   let seed = Date.now();
   for (let i = a.length - 1; i > 0; i--) {
     seed = (seed * 1664525 + 1013904223) & 0xffffffff;
@@ -16,135 +15,126 @@ function shuffleArray<T>(arr: T[]): T[] {
   return a;
 }
 
-interface ImagePlacement {
+// A single image block in the collage layout
+interface ImageBlock {
   src: string;
   title: string;
-  x: string;    // left %
-  y: string;    // top %
-  w: string;    // width in vw or px
-  rotate: number;
-  zIndex: number;
-  aspectRatio: string;
+  slug: string;
+  // Column span: 1, 2, or 3 out of a 12-col grid
+  colSpan: number;
+  // Optional alignment offset (margin-left as col offset)
+  colStart: number;
 }
 
-function generateLayout(images: { src: string; title: string }[]): ImagePlacement[] {
-  // Pick 7-9 images to scatter
-  const shuffled = shuffleArray(images);
-  const count = 8;
-  const selected = shuffled.slice(0, count);
+// Pre-defined row templates: each row has image slot definitions
+// colStart is 1-based out of 12 columns, colSpan is width
+const ROW_TEMPLATES: { colStart: number; colSpan: number }[][] = [
+  // Row 1: large left + small right
+  [{ colStart: 1, colSpan: 7 }, { colStart: 9, colSpan: 4 }],
+  // Row 2: small left offset + large right
+  [{ colStart: 2, colSpan: 4 }, { colStart: 7, colSpan: 6 }],
+  // Row 3: three images
+  [{ colStart: 1, colSpan: 4 }, { colStart: 5, colSpan: 4 }, { colStart: 10, colSpan: 3 }],
+  // Row 4: centred large
+  [{ colStart: 3, colSpan: 8 }],
+  // Row 5: two even
+  [{ colStart: 1, colSpan: 5 }, { colStart: 7, colSpan: 5 }],
+  // Row 6: small + large offset
+  [{ colStart: 1, colSpan: 3 }, { colStart: 5, colSpan: 7 }],
+  // Row 7: large left
+  [{ colStart: 1, colSpan: 6 }, { colStart: 8, colSpan: 4 }],
+  // Row 8: three
+  [{ colStart: 2, colSpan: 3 }, { colStart: 6, colSpan: 4 }, { colStart: 11, colSpan: 2 }],
+];
 
-  // Pre-defined zone templates so they don't all stack in one corner
-  const zones = [
-    { x: 3, y: 12, w: 22, r: -2 },
-    { x: 28, y: 5, w: 18, r: 1.5 },
-    { x: 50, y: 8, w: 28, r: -1 },
-    { x: 74, y: 14, w: 18, r: 2 },
-    { x: 8, y: 50, w: 20, r: 1 },
-    { x: 32, y: 42, w: 26, r: -1.5 },
-    { x: 60, y: 46, w: 20, r: 1 },
-    { x: 78, y: 52, w: 16, r: -2 },
-  ];
+function buildLayout(images: typeof heroPool): ImageBlock[] {
+  const shuffled = seededShuffle(images);
+  const blocks: ImageBlock[] = [];
+  let imgIdx = 0;
 
-  const aspectRatios = [
-    "3/4", "4/5", "2/3", "3/4", "4/3", "2/3", "3/4", "4/5",
-  ];
+  for (const row of ROW_TEMPLATES) {
+    for (const slot of row) {
+      if (imgIdx >= shuffled.length) break;
+      blocks.push({
+        src: shuffled[imgIdx].src,
+        title: shuffled[imgIdx].title,
+        slug: shuffled[imgIdx].slug,
+        colSpan: slot.colSpan,
+        colStart: slot.colStart,
+      });
+      imgIdx++;
+    }
+    if (imgIdx >= shuffled.length) break;
+  }
 
-  return selected.map((img, i) => {
-    const zone = zones[i % zones.length];
-    // Randomize slightly around zone
-    const seed = (i * 137 + Date.now()) % 1000;
-    const jitterX = ((seed % 5) - 2) * 1.5;
-    const jitterY = (((seed * 7) % 7) - 3) * 2;
-
-    return {
-      src: img.src,
-      title: img.title,
-      x: `${Math.min(80, Math.max(0, zone.x + jitterX))}%`,
-      y: `${Math.min(72, Math.max(8, zone.y + jitterY))}%`,
-      w: `${zone.w}vw`,
-      rotate: zone.r + ((seed % 5) - 2) * 0.4,
-      zIndex: i + 1,
-      aspectRatio: aspectRatios[i % aspectRatios.length],
-    };
-  });
+  return blocks;
 }
 
 export default function Hero() {
-  const [layout] = useState<ImagePlacement[]>(() =>
-    generateLayout(heroImages)
-  );
-  const [hovered, setHovered] = useState<number | null>(null);
+  const layout = useMemo(() => buildLayout(heroPool), []);
 
   return (
-    <div className="relative min-h-screen bg-background overflow-hidden">
-      {/* Big editorial title */}
-      <motion.div
-        className="absolute bottom-8 left-8 z-50 pointer-events-none select-none"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.4 }}
-      >
-        <h1 className="font-display text-[clamp(4rem,12vw,14rem)] leading-none tracking-tight text-foreground">
+    <section className="bg-background w-full">
+      {/* Hero header */}
+      <div className="px-8 pt-12 pb-8">
+        <motion.h1
+          className="font-display text-[clamp(4.5rem,13vw,15rem)] leading-[0.88] tracking-tight text-foreground font-black"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+        >
           DAVID<br />THOMPSON
-        </h1>
-        <p className="font-serif italic text-[clamp(0.9rem,1.5vw,1.2rem)] tracking-widest text-foreground opacity-60 mt-1 ml-1">
+        </motion.h1>
+        <motion.p
+          className="font-serif italic text-[clamp(0.9rem,1.4vw,1.15rem)] text-foreground opacity-50 mt-3 ml-1 tracking-widest"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.5 }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+        >
           Fashion &amp; Beauty Photographer — London
-        </p>
-      </motion.div>
+        </motion.p>
+      </div>
 
-      {/* Scattered images */}
-      {layout.map((img, i) => (
-        <motion.div
-          key={`${img.src}-${i}`}
-          className="absolute cursor-pointer"
-          style={{
-            left: img.x,
-            top: img.y,
-            width: img.w,
-            zIndex: hovered === i ? 50 : img.zIndex,
-            rotate: img.rotate,
-            aspectRatio: img.aspectRatio,
-          }}
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: i * 0.08 }}
-          whileHover={{ scale: 1.03, zIndex: 50 }}
-          onHoverStart={() => setHovered(i)}
-          onHoverEnd={() => setHovered(null)}
-        >
-          <Link to={`/work/${img.title.toLowerCase().replace(/[\s,\.]+/g, "-")}`}>
-            <div className="relative w-full h-full overflow-hidden group">
-              <img
-                src={img.src}
-                alt={img.title}
-                className="w-full h-full object-cover"
-                style={{ aspectRatio: img.aspectRatio }}
-              />
-              <div className="absolute inset-0 bg-foreground opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
-              <div className="absolute bottom-0 left-0 right-0 p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <span className="font-sans text-[0.6rem] tracking-[0.15em] uppercase text-background bg-foreground px-1 py-0.5">
-                  {img.title}
-                </span>
-              </div>
-            </div>
-          </Link>
-        </motion.div>
-      ))}
-
-      {/* Scroll hint */}
-      <motion.div
-        className="absolute top-24 right-8 z-10"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.4 }}
-        transition={{ delay: 1.5 }}
+      {/* Collage grid — 12-col CSS grid, no cropping, straight */}
+      <div
+        className="px-6 pb-24"
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(12, 1fr)",
+          gap: "clamp(6px, 1vw, 14px)",
+          alignItems: "start",
+        }}
       >
-        <p
-          className="font-sans text-[0.6rem] tracking-[0.25em] uppercase text-foreground"
-          style={{ writingMode: "vertical-rl" }}
-        >
-          Scroll to explore
-        </p>
-      </motion.div>
-    </div>
+        {layout.map((block, i) => (
+          <motion.div
+            key={`${block.slug}-${i}`}
+            style={{
+              gridColumn: `${block.colStart} / span ${block.colSpan}`,
+            }}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, delay: (i % 4) * 0.07 }}
+          >
+            <Link to={`/work/${block.slug}`} className="group block">
+              <div className="relative overflow-hidden">
+                {/* No cropping: natural aspect ratio preserved */}
+                <img
+                  src={block.src}
+                  alt={block.title}
+                  className="w-full h-auto block transition-transform duration-700 group-hover:scale-[1.02]"
+                />
+                <div className="absolute inset-0 bg-foreground opacity-0 group-hover:opacity-30 transition-opacity duration-400" />
+                <div className="absolute bottom-0 left-0 p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span className="font-sans text-[0.55rem] tracking-[0.18em] uppercase text-background bg-foreground px-1.5 py-0.5">
+                    {block.title}
+                  </span>
+                </div>
+              </div>
+            </Link>
+          </motion.div>
+        ))}
+      </div>
+    </section>
   );
 }
