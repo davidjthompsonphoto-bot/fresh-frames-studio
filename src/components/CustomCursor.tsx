@@ -15,7 +15,7 @@ export default function CustomCursor() {
   return (
     <div
       ref={dotRef}
-      className="fixed top-0 left-0 w-6 h-6 rounded-full bg-red-600 pointer-events-none z-[9999] mix-blend-multiply"
+      className="fixed top-0 left-0 w-6 h-6 rounded-full bg-red-600 pointer-events-none z-[9999]"
       style={{ willChange: "transform", transition: "transform 0.08s ease-out" }}
     />
   );
