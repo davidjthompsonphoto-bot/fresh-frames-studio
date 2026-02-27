@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Nav from "@/components/Nav";
+import SEO from "@/components/SEO";
 import { portfolios } from "@/data/portfolio";
 
 function shuffle<T>(arr: T[]): T[] {
@@ -22,10 +23,26 @@ const objectPosition: Record<string, string> = {
 // Slugs whose images have baked-in black edges — use inset shadow to hide them
 const REMOVE_EDGE_SLUGS = new Set(["viva-la-linda", "please-sir"]);
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": "https://davidthompsonphotography.com/work#webpage",
+  "url": "https://davidthompsonphotography.com/work",
+  "name": "Work — David Thompson Photography",
+  "description": "Fashion and beauty photography portfolio by David Thompson — editorial series for Vogue, Marie-Claire, The New York Times Magazine and more.",
+  "isPartOf": { "@id": "https://davidthompsonphotography.com/#website" },
+};
+
 export default function Work() {
   const randomised = useMemo(() => shuffle(portfolios), []);
   return (
     <div className="bg-background min-h-screen">
+      <SEO
+        title="Work — David Thompson Photography"
+        description="Fashion and beauty photography portfolio by David Thompson — editorial series for Vogue, Marie-Claire, The New York Times Magazine and more."
+        canonicalPath="/work"
+        jsonLd={jsonLd}
+      />
       <Nav />
       <main className="pt-24 px-8 pb-16">
         <motion.h2
@@ -48,9 +65,10 @@ export default function Work() {
                 <div className="aspect-[3/4] overflow-hidden bg-background relative">
                   <img
                     src={p.images[0]}
-                    alt={p.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    alt={`${p.title}${p.client ? ` — ${p.client}` : ""} by David Thompson`}
+                    className="w-full h-full object-cover transition-transform duration-700"
                     style={{ objectPosition: objectPosition[p.slug] ?? "center" }}
+                    loading="lazy"
                   />
                   {REMOVE_EDGE_SLUGS.has(p.slug) && (
                     <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: "inset 0 0 0 20px hsl(var(--background))" }} />
