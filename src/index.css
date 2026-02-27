@@ -51,6 +51,12 @@
     cursor: none !important;
   }
 
+  @media (pointer: coarse) {
+    * {
+      cursor: auto !important;
+    }
+  }
+
   img {
     border: none;
     outline: none;
