@@ -7,13 +7,13 @@ const NAV_LINKS = [
   { to: "/contact", label: "Contact" },
 ];
 
-function NavContents({ color, opacity }: { color?: string; opacity?: (to: string) => number }) {
+function NavContents({ color, activeOpacity }: { color?: string; activeOpacity: (to: string) => number }) {
   const location = useLocation();
   return (
     <>
       <Link
         to="/"
-        className="font-display text-base font-bold tracking-[0.12em] uppercase transition-opacity hover:opacity-60"
+        className="font-display text-base font-bold tracking-[0.12em] uppercase hover:opacity-60 transition-opacity"
         style={{ color }}
       >
         David Thompson
@@ -24,11 +24,7 @@ function NavContents({ color, opacity }: { color?: string; opacity?: (to: string
             <Link
               to={to}
               className="font-sans text-xs tracking-[0.2em] uppercase hover:opacity-60"
-              style={{
-                color,
-                opacity: opacity ? opacity(to) : undefined,
-                transition: "opacity 0.2s",
-              }}
+              style={{ color, opacity: activeOpacity(to) }}
             >
               {label}
             </Link>
@@ -41,12 +37,23 @@ function NavContents({ color, opacity }: { color?: string; opacity?: (to: string
 
 export default function Nav() {
   const location = useLocation();
-  const [letterRects, setLetterRects] = useState<DOMRect[]>([]);
+  const navRef = useRef<HTMLElement>(null);
+  const [letterRects, setLetterRects] = useState<{ left: number; right: number; nearNav: boolean }[]>([]);
   const rafRef = useRef<number | null>(null);
 
   const update = useCallback(() => {
+    const navEl = navRef.current;
+    const navBottom = navEl ? navEl.getBoundingClientRect().bottom : 70;
     const els = document.querySelectorAll<HTMLElement>("[data-initial-letter]");
-    setLetterRects(Array.from(els).map((el) => el.getBoundingClientRect()));
+    const rects = Array.from(els).map((el) => {
+      const r = el.getBoundingClientRect();
+      return {
+        left: r.left,
+        right: r.right,
+        nearNav: r.bottom > 0 && r.top < navBottom,
+      };
+    });
+    setLetterRects(rects);
   }, []);
 
   useEffect(() => {
@@ -55,9 +62,11 @@ export default function Nav() {
       rafRef.current = requestAnimationFrame(update);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
-    update();
+    // Slight delay to ensure hero letters are mounted
+    const t = setTimeout(update, 100);
     return () => {
       window.removeEventListener("scroll", onScroll);
+      clearTimeout(t);
       if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
     };
   }, [update]);
@@ -68,27 +77,27 @@ export default function Nav() {
   return (
     <>
       {/* Base nav */}
-      <nav className="fixed top-0 left-0 right-0 z-[200] flex items-center justify-between px-8 py-5 gap-8 bg-background">
-        <NavContents opacity={activeOpacity} />
+      <nav
+        ref={navRef}
+        className="fixed top-0 left-0 right-0 z-[200] flex items-center justify-between px-8 py-5 gap-8 bg-background"
+      >
+        <NavContents activeOpacity={activeOpacity} />
       </nav>
 
-      {/* White mirror nav — one clone per letter, each clipped to that letter's bounding box */}
+      {/* White mirror nav — one per letter, clipped to letter's horizontal extent only */}
       {letterRects.map((rect, i) => {
+        if (!rect.nearNav) return null;
         const vw = window.innerWidth;
-        const vh = window.innerHeight;
-        // Only render when letter is near the nav area
-        if (rect.bottom < 0 || rect.top > 80) return null;
-        const top = Math.max(0, rect.top);
-        const right = Math.max(0, vw - rect.right);
-        const bottom = Math.max(0, vh - rect.bottom);
-        const left = Math.max(0, rect.left);
+        const clipLeft = Math.max(0, rect.left);
+        const clipRight = Math.max(0, vw - rect.right);
         return (
           <nav
             key={i}
+            aria-hidden="true"
             className="fixed top-0 left-0 right-0 z-[400] flex items-center justify-between px-8 py-5 gap-8 pointer-events-none"
-            style={{ clipPath: `inset(${top}px ${right}px ${bottom}px ${left}px)` }}
+            style={{ clipPath: `inset(0px ${clipRight}px 0px ${clipLeft}px)` }}
           >
-            <NavContents color="white" opacity={() => 1} />
+            <NavContents color="white" activeOpacity={() => 1} />
           </nav>
         );
       })}
