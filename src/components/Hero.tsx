@@ -236,7 +236,7 @@ export default function Hero() {
               left: `${(slot.left / refWidth) * 100}%`,
               top: slot.top,
               width: `${(slot.width / refWidth) * 100}%`,
-              zIndex: hoveredIdx === i ? 100 : slot.zIndex,
+              zIndex: hoveredIdx === i ? 400 : slot.zIndex,
               transition: "z-index 0s",
             }}
             onMouseEnter={() => setHoveredIdx(i)}
@@ -256,11 +256,6 @@ export default function Hero() {
                 {["viva-la-linda", "please-sir"].includes(slot.slug) && (
                   <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: "inset 0 0 0 20px hsl(var(--background))" }} />
                 )}
-                <div className="absolute bottom-0 left-0 p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="font-sans text-[0.55rem] tracking-[0.18em] uppercase text-background bg-foreground px-1.5 py-0.5">
-                    {slot.title}
-                  </span>
-                </div>
               </div>
             </Link>
           </motion.div>
