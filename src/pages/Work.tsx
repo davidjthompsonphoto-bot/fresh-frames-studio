@@ -13,6 +13,12 @@ function shuffle<T>(arr: T[]): T[] {
   return a;
 }
 
+// Per-slug object-position overrides to keep the model centred in the thumbnail crop
+const objectPosition: Record<string, string> = {
+  "the-national": "center 20%",
+  "mlle-birkin":  "right center",
+};
+
 export default function Work() {
   const randomised = useMemo(() => shuffle(portfolios), []);
   return (
@@ -41,6 +47,7 @@ export default function Work() {
                     src={p.images[0]}
                     alt={p.title}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    style={{ objectPosition: objectPosition[p.slug] ?? "center" }}
                   />
                 </div>
                 <div className="absolute inset-0 bg-foreground opacity-0 group-hover:opacity-40 transition-opacity duration-300" />
