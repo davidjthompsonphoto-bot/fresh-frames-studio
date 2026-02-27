@@ -42,7 +42,7 @@ export default function Work() {
               transition={{ duration: 0.4, delay: i * 0.03 }}
             >
               <Link to={`/work/${p.slug}`} className="group block relative overflow-hidden">
-                <div className="aspect-[3/4] overflow-hidden bg-muted">
+                <div className="aspect-[3/4] overflow-hidden bg-background">
                   <img
                     src={p.images[0]}
                     alt={p.title}
