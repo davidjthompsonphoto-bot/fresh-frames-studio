@@ -119,7 +119,7 @@ export default function Hero() {
               left: `${(left / 1200) * 100}%`,
               top,
               zIndex: 50,
-              fontSize: "clamp(400px, 62vw, 750px)",
+              fontSize: "clamp(600px, 93vw, 1125px)",
               lineHeight: 0.85,
               fontWeight: 900,
               fontStyle: "italic",
