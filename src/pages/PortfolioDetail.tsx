@@ -8,6 +8,10 @@ export default function PortfolioDetail() {
   const { slug } = useParams<{ slug: string }>();
   const portfolio = portfolios.find(p => p.slug === slug);
   const [lightbox, setLightbox] = useState<string | null>(null);
+  const [next] = useState(() => {
+    const others = portfolios.filter(p => p.slug !== slug);
+    return others[Math.floor(Math.random() * others.length)];
+  });
 
   if (!portfolio) {
     return (
@@ -23,7 +27,6 @@ export default function PortfolioDetail() {
 
   const idx = portfolios.findIndex(p => p.slug === slug);
   const prev = portfolios[idx - 1];
-  const next = portfolios[idx + 1];
   const needsEdgeFix = ["viva-la-linda", "please-sir"].includes(portfolio.slug);
 
   return (
