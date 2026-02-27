@@ -12,7 +12,7 @@ interface SEOProps {
 const SITE_URL = "https://davidthompsonphotography.com";
 const DEFAULT_IMAGE = "https://payload.cargocollective.com/1/1/60539/10079154/prt_1435310768.jpg";
 const DEFAULT_DESC =
-  "David Thompson is a multi award-winning, London-based fashion and beauty photographer. Work featured in Vogue, The New York Times Magazine, Marie-Claire and held in The National Portrait Gallery.";
+  "David Thompson is a multi award-winning, London-based fashion and beauty photographer. Editorial and campaign work for Vogue, Condé Nast, The New York Times Magazine, Marie-Claire. Bridal, beauty, jewellery and luxury advertising photography. Work held in The National Portrait Gallery.";
 
 export default function SEO({
   title = "David Thompson — Fashion & Beauty Photographer",
