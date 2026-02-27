@@ -60,7 +60,7 @@ const CLUSTERS: ClusterSlot[][] = [
   ],
 ];
 
-const CONTAINER_HEIGHT = 2900; // px
+const CONTAINER_HEIGHT = 3600; // px — tall enough for bottom images to fully render
 
 export default function Hero() {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
@@ -104,7 +104,7 @@ export default function Hero() {
 
       {/* Overlapping collage — absolutely positioned within a fixed-height container */}
       <div
-        className="relative w-full overflow-hidden"
+        className="relative w-full"
         style={{ height: `${CONTAINER_HEIGHT}px` }}
       >
         {slots.map((slot, i) => (
