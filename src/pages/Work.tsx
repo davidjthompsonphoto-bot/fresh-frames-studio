@@ -15,8 +15,8 @@ function shuffle<T>(arr: T[]): T[] {
 
 // Per-slug object-position overrides to keep the model centred in the thumbnail crop
 const objectPosition: Record<string, string> = {
-  "the-national": "center 20%",
-  "mlle-birkin":  "right center",
+  "the-national": "90% center",
+  "mlle-birkin":  "95% center",
 };
 
 export default function Work() {
