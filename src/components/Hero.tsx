@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { heroPool } from "@/data/portfolio";
@@ -63,6 +63,8 @@ const CLUSTERS: ClusterSlot[][] = [
 const CONTAINER_HEIGHT = 2900; // px
 
 export default function Hero() {
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+
   const slots = useMemo(() => {
     const shuffled = seededShuffle(heroPool);
     // Cycle through images if we have fewer than slots
@@ -113,8 +115,11 @@ export default function Hero() {
               left: `${(slot.left / 1200) * 100}%`,
               top: slot.top,
               width: `${(slot.width / 1200) * 100}%`,
-              zIndex: slot.zIndex,
+              zIndex: hoveredIdx === i ? 100 : slot.zIndex,
+              transition: "z-index 0s",
             }}
+            onMouseEnter={() => setHoveredIdx(i)}
+            onMouseLeave={() => setHoveredIdx(null)}
             initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
