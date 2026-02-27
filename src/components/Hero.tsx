@@ -28,44 +28,45 @@ interface ClusterSlot {
 // Hand-crafted clusters of overlapping images.
 // Container is 100% width; we use absolute px values that scale via a transform.
 // Each cluster has 2-4 slots. We spread clusters vertically so the page scrolls.
+// Images are placed at absolute positions. Adjacent clusters overlap vertically
+// so images from different rows interleave. zIndex controls what sits on top.
 const CLUSTERS: ClusterSlot[][] = [
-  // Cluster 1 — top left heavy, one portrait overlapping a landscape
+  // Cluster 1
   [
-    { left: 20,  top: 0,   width: 480, zIndex: 1 },
-    { left: 380, top: 60,  width: 320, zIndex: 2 },
-    { left: 700, top: 20,  width: 380, zIndex: 1 },
+    { left: 20,   top: 0,    width: 500, zIndex: 2 },
+    { left: 460,  top: 80,   width: 320, zIndex: 3 },
+    { left: 700,  top: 30,   width: 400, zIndex: 1 },
   ],
-  // Cluster 2 — right-aligned trio
+  // Cluster 2 — overlaps cluster 1 by ~200px
   [
-    { left: 60,  top: 820,  width: 300, zIndex: 1 },
-    { left: 300, top: 760,  width: 500, zIndex: 2 },
-    { left: 740, top: 800,  width: 360, zIndex: 3 },
-    { left: 1020,top: 780,  width: 220, zIndex: 2 },
+    { left: 30,   top: 480,  width: 300, zIndex: 4 },
+    { left: 270,  top: 420,  width: 520, zIndex: 2 },
+    { left: 740,  top: 460,  width: 360, zIndex: 5 },
+    { left: 1020, top: 390,  width: 230, zIndex: 3 },
   ],
-  // Cluster 3
+  // Cluster 3 — overlaps cluster 2
   [
-    { left: 10,  top: 1560, width: 420, zIndex: 2 },
-    { left: 360, top: 1620, width: 280, zIndex: 3 },
-    { left: 580, top: 1540, width: 440, zIndex: 1 },
-    { left: 960, top: 1580, width: 300, zIndex: 2 },
+    { left: 10,   top: 880,  width: 440, zIndex: 3 },
+    { left: 380,  top: 960,  width: 300, zIndex: 5 },
+    { left: 600,  top: 840,  width: 460, zIndex: 2 },
+    { left: 980,  top: 900,  width: 260, zIndex: 4 },
   ],
-  // Cluster 4
+  // Cluster 4 — overlaps cluster 3
   [
-    { left: 100, top: 2340, width: 340, zIndex: 1 },
-    { left: 380, top: 2280, width: 500, zIndex: 2 },
-    { left: 820, top: 2320, width: 360, zIndex: 1 },
+    { left: 80,   top: 1320, width: 360, zIndex: 2 },
+    { left: 380,  top: 1240, width: 520, zIndex: 4 },
+    { left: 840,  top: 1280, width: 380, zIndex: 3 },
   ],
-  // Cluster 5
+  // Cluster 5 — overlaps cluster 4
   [
-    { left: 20,  top: 3060, width: 260, zIndex: 2 },
-    { left: 240, top: 3000, width: 460, zIndex: 1 },
-    { left: 640, top: 3040, width: 320, zIndex: 3 },
-    { left: 900, top: 3020, width: 280, zIndex: 2 },
+    { left: 20,   top: 1700, width: 280, zIndex: 4 },
+    { left: 260,  top: 1640, width: 480, zIndex: 2 },
+    { left: 660,  top: 1680, width: 340, zIndex: 5 },
+    { left: 920,  top: 1620, width: 300, zIndex: 3 },
   ],
 ];
 
-const TOTAL_SLOTS = CLUSTERS.reduce((sum, c) => sum + c.length, 0);
-const CONTAINER_HEIGHT = 3600; // px — full scroll height of the collage
+const CONTAINER_HEIGHT = 2200; // px
 
 export default function Hero() {
   const slots = useMemo(() => {
