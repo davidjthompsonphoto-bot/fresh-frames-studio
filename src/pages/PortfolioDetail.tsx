@@ -46,7 +46,7 @@ export default function PortfolioDetail() {
         </motion.div>
 
         {/* Images */}
-        <div className="columns-1 sm:columns-2 lg:columns-3 gap-0.5 space-y-0.5">
+        <div className="columns-1 sm:columns-2 lg:columns-3 gap-8 space-y-8">
           {portfolio.images.map((src, i) => (
             <motion.div
               key={src}
