@@ -37,22 +37,18 @@ function NavContents({ activeOpacity, style }: { activeOpacity: (to: string) => 
 export default function Nav() {
   const location = useLocation();
   const navRef = useRef<HTMLElement>(null);
-  const [letterRects, setLetterRects] = useState<{ left: number; right: number }[]>([]);
+  const [letterNearNav, setLetterNearNav] = useState(false);
   const rafRef = useRef<number | null>(null);
 
   const update = useCallback(() => {
     const navEl = navRef.current;
     const navBottom = navEl ? navEl.getBoundingClientRect().bottom : 70;
     const els = document.querySelectorAll<HTMLElement>("[data-initial-letter]");
-    const rects: { left: number; right: number }[] = [];
-    els.forEach((el) => {
+    const near = Array.from(els).some((el) => {
       const r = el.getBoundingClientRect();
-      // Only include letters whose vertical extent overlaps the nav bar
-      if (r.bottom > 0 && r.top < navBottom) {
-        rects.push({ left: r.left, right: r.right });
-      }
+      return r.bottom > 0 && r.top < navBottom;
     });
-    setLetterRects(rects);
+    setLetterNearNav(near);
   }, []);
 
   useEffect(() => {
@@ -82,28 +78,19 @@ export default function Nav() {
         <NavContents activeOpacity={activeOpacity} />
       </nav>
 
-      {/* One clipped difference-blend overlay per letter.
-          clip-path restricts to the letter's horizontal extent (so italic white-space on left/right is excluded),
-          mix-blend-mode:difference then handles pixel-level inversion — white over black ink = white,
-          white over white background (letter holes) = black = invisible. */}
-      {letterRects.map((rect, i) => {
-        const vw = window.innerWidth;
-        const clipLeft = Math.max(0, rect.left);
-        const clipRight = Math.max(0, vw - rect.right);
-        return (
-          <nav
-            key={i}
-            aria-hidden="true"
-            className="fixed top-0 left-0 right-0 z-[500] flex items-center justify-between px-8 py-5 gap-8 pointer-events-none text-white"
-            style={{
-              clipPath: `inset(0px ${clipRight}px 0px ${clipLeft}px)`,
-              mixBlendMode: "difference",
-            }}
-          >
-            <NavContents activeOpacity={() => 1} />
-          </nav>
-        );
-      })}
+      {/* Difference-blend overlay — only active when a letter is vertically near the nav.
+          No clip-path: mix-blend-mode:difference handles everything pixel-by-pixel.
+          White text over black letter ink = white (text inverts).
+          White text over white background (letter holes or empty space) = black = invisible. */}
+      {letterNearNav && (
+        <nav
+          aria-hidden="true"
+          className="fixed top-0 left-0 right-0 z-[500] flex items-center justify-between px-8 py-5 gap-8 pointer-events-none text-white"
+          style={{ mixBlendMode: "difference" }}
+        >
+          <NavContents activeOpacity={() => 1} />
+        </nav>
+      )}
     </>
   );
 }
