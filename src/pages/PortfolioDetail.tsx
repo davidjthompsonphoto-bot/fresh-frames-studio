@@ -1,5 +1,5 @@
 import { useParams, Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Nav from "@/components/Nav";
 import { portfolios } from "@/data/portfolio";
@@ -8,10 +8,17 @@ export default function PortfolioDetail() {
   const { slug } = useParams<{ slug: string }>();
   const portfolio = portfolios.find(p => p.slug === slug);
   const [lightbox, setLightbox] = useState<string | null>(null);
+  const [prev] = useState(() => {
+    const lastSlug = sessionStorage.getItem("lastVisitedStory");
+    return lastSlug ? portfolios.find(p => p.slug === lastSlug) ?? null : null;
+  });
   const [next] = useState(() => {
     const others = portfolios.filter(p => p.slug !== slug);
     return others[Math.floor(Math.random() * others.length)];
   });
+
+  // Record this story as the last visited
+  useEffect(() => { sessionStorage.setItem("lastVisitedStory", slug ?? ""); }, [slug]);
 
   if (!portfolio) {
     return (
@@ -26,7 +33,6 @@ export default function PortfolioDetail() {
   }
 
   const idx = portfolios.findIndex(p => p.slug === slug);
-  const prev = portfolios[idx - 1];
   const needsEdgeFix = ["viva-la-linda", "please-sir"].includes(portfolio.slug);
 
   return (
