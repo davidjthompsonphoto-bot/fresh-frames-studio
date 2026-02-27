@@ -1,9 +1,8 @@
-import { useState, useMemo } from "react";
+import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { heroPool } from "@/data/portfolio";
 
-// Seeded random shuffle using current timestamp so it changes each reload
 function seededShuffle<T>(arr: T[]): T[] {
   const a = [...arr];
   let seed = Date.now();
@@ -15,70 +14,81 @@ function seededShuffle<T>(arr: T[]): T[] {
   return a;
 }
 
-// A single image block in the collage layout
-interface ImageBlock {
-  src: string;
-  title: string;
-  slug: string;
-  // Column span: 1, 2, or 3 out of a 12-col grid
-  colSpan: number;
-  // Optional alignment offset (margin-left as col offset)
-  colStart: number;
+// Each "cluster" places several images in a loose overlapping group.
+// Positions are expressed as percentages of the container width/height.
+// z-index layering is defined per slot.
+interface ClusterSlot {
+  // left/top as percentage of the 1200px wide container
+  left: number; // px
+  top: number;  // px
+  width: number; // px
+  zIndex: number;
 }
 
-// Pre-defined row templates: each row has image slot definitions
-// colStart is 1-based out of 12 columns, colSpan is width
-const ROW_TEMPLATES: { colStart: number; colSpan: number }[][] = [
-  // Row 1: large left + small right
-  [{ colStart: 1, colSpan: 7 }, { colStart: 9, colSpan: 4 }],
-  // Row 2: small left offset + large right
-  [{ colStart: 2, colSpan: 4 }, { colStart: 7, colSpan: 6 }],
-  // Row 3: three images
-  [{ colStart: 1, colSpan: 4 }, { colStart: 5, colSpan: 4 }, { colStart: 10, colSpan: 3 }],
-  // Row 4: centred large
-  [{ colStart: 3, colSpan: 8 }],
-  // Row 5: two even
-  [{ colStart: 1, colSpan: 5 }, { colStart: 7, colSpan: 5 }],
-  // Row 6: small + large offset
-  [{ colStart: 1, colSpan: 3 }, { colStart: 5, colSpan: 7 }],
-  // Row 7: large left
-  [{ colStart: 1, colSpan: 6 }, { colStart: 8, colSpan: 4 }],
-  // Row 8: three
-  [{ colStart: 2, colSpan: 3 }, { colStart: 6, colSpan: 4 }, { colStart: 11, colSpan: 2 }],
+// Hand-crafted clusters of overlapping images.
+// Container is 100% width; we use absolute px values that scale via a transform.
+// Each cluster has 2-4 slots. We spread clusters vertically so the page scrolls.
+const CLUSTERS: ClusterSlot[][] = [
+  // Cluster 1 — top left heavy, one portrait overlapping a landscape
+  [
+    { left: 20,  top: 0,   width: 480, zIndex: 1 },
+    { left: 380, top: 60,  width: 320, zIndex: 2 },
+    { left: 700, top: 20,  width: 380, zIndex: 1 },
+  ],
+  // Cluster 2 — right-aligned trio
+  [
+    { left: 60,  top: 820,  width: 300, zIndex: 1 },
+    { left: 300, top: 760,  width: 500, zIndex: 2 },
+    { left: 740, top: 800,  width: 360, zIndex: 3 },
+    { left: 1020,top: 780,  width: 220, zIndex: 2 },
+  ],
+  // Cluster 3
+  [
+    { left: 10,  top: 1560, width: 420, zIndex: 2 },
+    { left: 360, top: 1620, width: 280, zIndex: 3 },
+    { left: 580, top: 1540, width: 440, zIndex: 1 },
+    { left: 960, top: 1580, width: 300, zIndex: 2 },
+  ],
+  // Cluster 4
+  [
+    { left: 100, top: 2340, width: 340, zIndex: 1 },
+    { left: 380, top: 2280, width: 500, zIndex: 2 },
+    { left: 820, top: 2320, width: 360, zIndex: 1 },
+  ],
+  // Cluster 5
+  [
+    { left: 20,  top: 3060, width: 260, zIndex: 2 },
+    { left: 240, top: 3000, width: 460, zIndex: 1 },
+    { left: 640, top: 3040, width: 320, zIndex: 3 },
+    { left: 900, top: 3020, width: 280, zIndex: 2 },
+  ],
 ];
 
-function buildLayout(images: typeof heroPool): ImageBlock[] {
-  const shuffled = seededShuffle(images);
-  const blocks: ImageBlock[] = [];
-  let imgIdx = 0;
-
-  for (const row of ROW_TEMPLATES) {
-    for (const slot of row) {
-      if (imgIdx >= shuffled.length) break;
-      blocks.push({
-        src: shuffled[imgIdx].src,
-        title: shuffled[imgIdx].title,
-        slug: shuffled[imgIdx].slug,
-        colSpan: slot.colSpan,
-        colStart: slot.colStart,
-      });
-      imgIdx++;
-    }
-    if (imgIdx >= shuffled.length) break;
-  }
-
-  return blocks;
-}
+const TOTAL_SLOTS = CLUSTERS.reduce((sum, c) => sum + c.length, 0);
+const CONTAINER_HEIGHT = 3600; // px — full scroll height of the collage
 
 export default function Hero() {
-  const layout = useMemo(() => buildLayout(heroPool), []);
+  const slots = useMemo(() => {
+    const shuffled = seededShuffle(heroPool);
+    // Cycle through images if we have fewer than slots
+    const result: Array<ClusterSlot & { src: string; title: string; slug: string }> = [];
+    let idx = 0;
+    for (const cluster of CLUSTERS) {
+      for (const slot of cluster) {
+        const img = shuffled[idx % shuffled.length];
+        result.push({ ...slot, src: img.src, title: img.title, slug: img.slug });
+        idx++;
+      }
+    }
+    return result;
+  }, []);
 
   return (
     <section className="bg-background w-full">
       {/* Hero header */}
-      <div className="px-8 pt-12 pb-8">
+      <div className="px-8 pt-12 pb-10">
         <motion.h1
-          className="font-display text-[clamp(4.5rem,13vw,15rem)] leading-[0.88] tracking-tight text-foreground font-black"
+          className="font-display text-[clamp(4rem,11vw,13rem)] leading-[0.9] tracking-tight text-foreground font-bold"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
@@ -86,7 +96,7 @@ export default function Hero() {
           DAVID<br />THOMPSON
         </motion.h1>
         <motion.p
-          className="font-serif italic text-[clamp(0.9rem,1.4vw,1.15rem)] text-foreground opacity-50 mt-3 ml-1 tracking-widest"
+          className="font-serif italic text-[clamp(0.85rem,1.3vw,1.1rem)] text-foreground/50 mt-3 ml-1 tracking-widest"
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.5 }}
           transition={{ duration: 0.7, delay: 0.3 }}
@@ -95,39 +105,37 @@ export default function Hero() {
         </motion.p>
       </div>
 
-      {/* Collage grid — 12-col CSS grid, no cropping, straight */}
+      {/* Overlapping collage — absolutely positioned within a fixed-height container */}
       <div
-        className="px-6 pb-24"
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(12, 1fr)",
-          gap: "clamp(6px, 1vw, 14px)",
-          alignItems: "start",
-        }}
+        className="relative w-full overflow-hidden"
+        style={{ height: `${CONTAINER_HEIGHT}px` }}
       >
-        {layout.map((block, i) => (
+        {slots.map((slot, i) => (
           <motion.div
-            key={`${block.slug}-${i}`}
+            key={`${slot.slug}-${i}`}
+            className="absolute"
             style={{
-              gridColumn: `${block.colStart} / span ${block.colSpan}`,
+              left: `${(slot.left / 1200) * 100}%`,
+              top: slot.top,
+              width: `${(slot.width / 1200) * 100}%`,
+              zIndex: slot.zIndex,
             }}
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.6, delay: (i % 4) * 0.07 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.65, delay: (i % 3) * 0.08 }}
           >
-            <Link to={`/work/${block.slug}`} className="group block">
-              <div className="relative overflow-hidden">
-                {/* No cropping: natural aspect ratio preserved */}
+            <Link to={`/work/${slot.slug}`} className="group block">
+              <div className="relative">
                 <img
-                  src={block.src}
-                  alt={block.title}
+                  src={slot.src}
+                  alt={slot.title}
                   className="w-full h-auto block transition-transform duration-700 group-hover:scale-[1.02]"
                 />
-                <div className="absolute inset-0 bg-foreground opacity-0 group-hover:opacity-30 transition-opacity duration-400" />
+                <div className="absolute inset-0 bg-foreground opacity-0 group-hover:opacity-25 transition-opacity duration-400" />
                 <div className="absolute bottom-0 left-0 p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <span className="font-sans text-[0.55rem] tracking-[0.18em] uppercase text-background bg-foreground px-1.5 py-0.5">
-                    {block.title}
+                    {slot.title}
                   </span>
                 </div>
               </div>

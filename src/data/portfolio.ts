@@ -422,10 +422,12 @@ export const portfolios: Portfolio[] = [
   },
 ];
 
-// One full-res image per portfolio, for the homepage collage
-// (first image from each portfolio's images array)
-export const heroPool: { src: string; title: string; slug: string }[] = portfolios.map(p => ({
-  src: p.images[0],
-  title: p.title,
-  slug: p.slug,
-}));
+// One full-res image per portfolio, for the homepage collage.
+// Only include portfolios that have real full-res images (not prt_ thumbnails).
+export const heroPool: { src: string; title: string; slug: string }[] = portfolios
+  .filter(p => p.images.length > 0 && !p.images[0].includes('/prt_'))
+  .map(p => ({
+    src: p.images[0],
+    title: p.title,
+    slug: p.slug,
+  }));
