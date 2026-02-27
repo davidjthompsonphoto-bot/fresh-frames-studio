@@ -17,6 +17,9 @@ export default function PortfolioDetail() {
     return others[Math.floor(Math.random() * others.length)];
   });
 
+  // Scroll to top on every story load
+  useEffect(() => { window.scrollTo(0, 0); }, [slug]);
+
   // Record this story as the last visited
   useEffect(() => { sessionStorage.setItem("lastVisitedStory", slug ?? ""); }, [slug]);
 
