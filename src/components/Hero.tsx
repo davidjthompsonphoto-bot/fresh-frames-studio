@@ -122,6 +122,7 @@ export default function Hero() {
               fontSize: "clamp(400px, 62vw, 750px)",
               lineHeight: 0.85,
               fontWeight: 900,
+              fontVariationSettings: "'wght' 900",
             }}
           >
             {letter}
