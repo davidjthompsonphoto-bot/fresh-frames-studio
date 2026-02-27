@@ -3,12 +3,10 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { heroPool } from "@/data/portfolio";
 
-function seededShuffle<T>(arr: T[]): T[] {
+function randomShuffle<T>(arr: T[]): T[] {
   const a = [...arr];
-  let seed = Date.now();
   for (let i = a.length - 1; i > 0; i--) {
-    seed = (seed * 1664525 + 1013904223) & 0xffffffff;
-    const j = Math.abs(seed) % (i + 1);
+    const j = Math.floor(Math.random() * (i + 1));
     [a[i], a[j]] = [a[j], a[i]];
   }
   return a;
@@ -66,7 +64,7 @@ export default function Hero() {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
   const slots = useMemo(() => {
-    const shuffled = seededShuffle(heroPool);
+    const shuffled = randomShuffle(heroPool);
     // Cycle through images if we have fewer than slots
     const result: Array<ClusterSlot & { src: string; title: string; slug: string }> = [];
     let idx = 0;

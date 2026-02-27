@@ -490,6 +490,19 @@ export const portfolios: Portfolio[] = [
     ],
     caption: "Main fashion editorial for 'The National' Magazine Dubai. Stylist Sorrel Kinder.",
   },
+  {
+    slug: "sports-day",
+    title: "Sports Day",
+    thumbnail: "https://payload.cargocollective.com/1/1/60539/738575/French%20M-C-06_fin.jpg",
+    images: [
+      "https://payload.cargocollective.com/1/1/60539/738575/French%20M-C-06_fin.jpg",
+      "https://payload.cargocollective.com/1/1/60539/738575/French%20M-C-02_fin.jpg",
+      "https://payload.cargocollective.com/1/1/60539/738575/French%20M-C-08_fin.jpg",
+      "https://payload.cargocollective.com/1/1/60539/738575/French%20M-C-03_fin.jpg",
+      "https://payload.cargocollective.com/1/1/60539/738575/French%20M-C-07_fin.jpg",
+    ],
+    caption: "Sports Lux fashion editorial shot in Paris for French Marie-Claire.",
+  },
 ];
 
 // One full-res image per portfolio, for the homepage collage — all 36 stories.
