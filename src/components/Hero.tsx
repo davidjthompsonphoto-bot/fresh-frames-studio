@@ -215,7 +215,7 @@ export default function Hero() {
             style={{
               left: `${(left / ref) * 100}%`,
               top,
-              zIndex: 50,
+              zIndex: 300,
               fontSize: letterSize,
               lineHeight: 0.85,
               fontWeight: 900,
