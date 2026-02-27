@@ -85,7 +85,7 @@ export default function Hero() {
       {/* Hero header */}
       <div className="px-8 pt-12 pb-10">
         <motion.h1
-          className="font-display text-[clamp(4rem,11vw,13rem)] leading-[0.9] tracking-tight text-foreground font-bold"
+          className="font-display text-[clamp(3rem,8vw,8rem)] leading-none tracking-tight text-foreground"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
