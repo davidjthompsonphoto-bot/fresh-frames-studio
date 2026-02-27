@@ -1,11 +1,13 @@
 import { useParams, Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Nav from "@/components/Nav";
 import { portfolios } from "@/data/portfolio";
 
 export default function PortfolioDetail() {
   const { slug } = useParams<{ slug: string }>();
   const portfolio = portfolios.find(p => p.slug === slug);
+  const [lightbox, setLightbox] = useState<string | null>(null);
 
   if (!portfolio) {
     return (
@@ -19,21 +21,55 @@ export default function PortfolioDetail() {
     );
   }
 
-  // Find adjacent portfolios
   const idx = portfolios.findIndex(p => p.slug === slug);
   const prev = portfolios[idx - 1];
   const next = portfolios[idx + 1];
+  const needsEdgeFix = ["viva-la-linda", "please-sir"].includes(portfolio.slug);
+
+  const [firstImage, ...restImages] = portfolio.images;
 
   return (
     <div className="bg-background min-h-screen">
       <Nav />
-      <main className="pt-24 px-8 pb-24">
+
+      {/* Lightbox */}
+      <AnimatePresence>
+        {lightbox && (
+          <motion.div
+            className="fixed inset-0 z-[999] bg-background flex items-center justify-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            onClick={() => setLightbox(null)}
+          >
+            <button
+              className="absolute top-6 right-8 font-sans text-[0.6rem] tracking-[0.25em] uppercase text-foreground opacity-50 hover:opacity-100 transition-opacity"
+              onClick={() => setLightbox(null)}
+            >
+              Close
+            </button>
+            <motion.img
+              src={lightbox}
+              alt=""
+              className="max-w-[90vw] max-h-[90vh] object-contain"
+              initial={{ scale: 0.96, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.96, opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              onClick={e => e.stopPropagation()}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <main className="pb-24">
         {/* Title */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="mb-10"
+          className="pt-24 px-8 mb-10"
         >
           <h2 className="font-display text-[clamp(2.5rem,7vw,7rem)] leading-none tracking-tight text-foreground uppercase">
             {portfolio.title}
@@ -45,30 +81,51 @@ export default function PortfolioDetail() {
           )}
         </motion.div>
 
-        {/* Images */}
-        <div className="columns-1 sm:columns-2 lg:columns-3 gap-8 space-y-8">
-          {portfolio.images.map((src, i) => (
-            <motion.div
-              key={src}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="break-inside-avoid overflow-hidden relative"
-            >
-              <img
-                src={src}
-                alt={`${portfolio.title} ${i + 1}`}
-                className="w-full block"
-              />
-              {["viva-la-linda", "please-sir"].includes(portfolio.slug) && (
-                <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: "inset 0 0 0 20px hsl(var(--background))" }} />
-              )}
-            </motion.div>
-          ))}
-        </div>
+        {/* Full-bleed first image */}
+        <motion.div
+          className="w-full mb-8 relative cursor-pointer"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          onClick={() => setLightbox(firstImage)}
+        >
+          <img
+            src={firstImage}
+            alt={`${portfolio.title} 1`}
+            className="w-full block"
+          />
+          {needsEdgeFix && (
+            <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: "inset 0 0 0 20px hsl(var(--background))" }} />
+          )}
+        </motion.div>
+
+        {/* Remaining images — masonry grid */}
+        {restImages.length > 0 && (
+          <div className="px-8 columns-1 sm:columns-2 lg:columns-3 gap-8 space-y-8">
+            {restImages.map((src, i) => (
+              <motion.div
+                key={src}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: (i + 1) * 0.08 }}
+                className="break-inside-avoid overflow-hidden relative cursor-pointer"
+                onClick={() => setLightbox(src)}
+              >
+                <img
+                  src={src}
+                  alt={`${portfolio.title} ${i + 2}`}
+                  className="w-full block"
+                />
+                {needsEdgeFix && (
+                  <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: "inset 0 0 0 20px hsl(var(--background))" }} />
+                )}
+              </motion.div>
+            ))}
+          </div>
+        )}
 
         {/* Navigation */}
-        <div className="flex justify-between mt-16 pt-8 border-t border-border">
+        <div className="flex justify-between mt-16 pt-8 border-t border-border px-8">
           {prev ? (
             <Link to={`/work/${prev.slug}`} className="group flex flex-col gap-1">
               <span className="font-sans text-[0.55rem] tracking-[0.2em] uppercase text-foreground opacity-40 group-hover:opacity-100 transition-opacity">← Previous</span>
