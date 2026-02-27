@@ -135,7 +135,7 @@ export default function PortfolioDetail() {
         </div>
 
         {/* Navigation */}
-        <div className="flex justify-between mt-16 pt-8 border-t border-border px-8">
+        <div className="flex flex-col sm:flex-row sm:justify-between gap-6 mt-16 pt-8 border-t border-border px-8">
           {prev ? (
             <Link to={`/work/${prev.slug}`} className="group flex flex-col gap-1">
               <span className="font-sans text-[0.55rem] tracking-[0.2em] uppercase text-foreground opacity-40 group-hover:opacity-100 transition-opacity">← Previous</span>
@@ -143,7 +143,7 @@ export default function PortfolioDetail() {
             </Link>
           ) : <div />}
           {next ? (
-            <Link to={`/work/${next.slug}`} className="group flex flex-col gap-1 items-end text-right">
+            <Link to={`/work/${next.slug}`} className="group flex flex-col gap-1 sm:items-end sm:text-right">
               <span className="font-sans text-[0.55rem] tracking-[0.2em] uppercase text-foreground opacity-40 group-hover:opacity-100 transition-opacity">Next →</span>
               <span className="font-display text-xl tracking-widest text-foreground uppercase">{next.title}</span>
             </Link>
