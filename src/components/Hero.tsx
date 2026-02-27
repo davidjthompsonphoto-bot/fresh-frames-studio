@@ -211,6 +211,7 @@ export default function Hero() {
         {initials.map(({ letter, left, top, ref }) => (
           <div
             key={letter}
+            data-initial-letter="true"
             className="absolute pointer-events-none select-none font-display text-foreground leading-none"
             style={{
               left: `${(left / ref) * 100}%`,
