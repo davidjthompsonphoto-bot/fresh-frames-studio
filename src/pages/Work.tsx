@@ -1,9 +1,20 @@
+import { useMemo } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Nav from "@/components/Nav";
 import { portfolios } from "@/data/portfolio";
 
+function shuffle<T>(arr: T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
 export default function Work() {
+  const randomised = useMemo(() => shuffle(portfolios), []);
   return (
     <div className="bg-background min-h-screen">
       <Nav />
@@ -17,7 +28,7 @@ export default function Work() {
           WORK
         </motion.h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-0.5">
-          {portfolios.map((p, i) => (
+          {randomised.map((p, i) => (
             <motion.div
               key={p.slug}
               initial={{ opacity: 0 }}
@@ -27,7 +38,7 @@ export default function Work() {
               <Link to={`/work/${p.slug}`} className="group block relative overflow-hidden">
                 <div className="aspect-[3/4] overflow-hidden bg-muted">
                   <img
-                    src={p.thumbnail}
+                    src={p.images[0]}
                     alt={p.title}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
