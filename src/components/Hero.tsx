@@ -130,7 +130,7 @@ export default function Hero() {
                   alt={slot.title}
                   className="w-full h-auto block transition-transform duration-700 group-hover:scale-[1.02]"
                 />
-                <div className="absolute inset-0" />
+                
                 <div className="absolute bottom-0 left-0 p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <span className="font-sans text-[0.55rem] tracking-[0.18em] uppercase text-background bg-foreground px-1.5 py-0.5">
                     {slot.title}
