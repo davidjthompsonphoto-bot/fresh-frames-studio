@@ -305,7 +305,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/9532134/Shot013_008_v2_670.jpg",
     ],
     caption: "Bridal fashion editorial work for Condé Nast Brides Magazine. Also featured in Vogue China. Styling by Bryony Toogood.",
-    client: "Condé Nast Brides",
+    client: "Vogue Brides",
   },
   {
     slug: "red-army",
@@ -359,7 +359,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/12592395/Untitled-3_670.jpg",
     ],
     caption: "Bridal fashion editorial for Condé Nast Brides Magazine. Also featured in Vogue Japan. Fashion Director Bryony Toogood.",
-    client: "Condé Nast Brides",
+    client: "Vogue Brides",
   },
   {
     slug: "the-remix",
@@ -373,7 +373,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/12227351/Untitled-4_670.jpg",
     ],
     caption: "Bridal fashion editorial for Condé Nast Brides Magazine. Also featured in Vogue Japan. Styling by Bryony Toogood.",
-    client: "Condé Nast Brides",
+    client: "Vogue Brides",
   },
   {
     slug: "beauty",
@@ -511,7 +511,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/6457096/Shot02_053_v4_New.jpg",
     ],
     caption: "Condé Nast Brides Magazine main fashion editorial and cover. Fashion Editor Bryony Toogood.",
-    client: "Condé Nast Brides",
+    client: "Vogue Brides",
   },
   {
     slug: "miss-shapes",
