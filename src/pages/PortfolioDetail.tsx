@@ -39,7 +39,7 @@ export default function PortfolioDetail() {
             {portfolio.title}
           </h2>
           {portfolio.caption && (
-            <p className="font-serif italic text-sm text-foreground opacity-60 mt-3 max-w-xl leading-relaxed">
+            <p className="font-serif italic text-[clamp(1rem,1.6vw,1.35rem)] text-foreground/70 mt-3 ml-1 tracking-widest">
               {portfolio.caption}
             </p>
           )}
