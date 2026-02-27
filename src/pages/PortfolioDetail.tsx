@@ -26,8 +26,6 @@ export default function PortfolioDetail() {
   const next = portfolios[idx + 1];
   const needsEdgeFix = ["viva-la-linda", "please-sir"].includes(portfolio.slug);
 
-  const [firstImage, ...restImages] = portfolio.images;
-
   return (
     <div className="bg-background min-h-screen">
       <Nav />
@@ -81,48 +79,28 @@ export default function PortfolioDetail() {
           )}
         </motion.div>
 
-        {/* Full-bleed first image */}
-        <motion.div
-          className="w-full mb-8 relative cursor-pointer"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          onClick={() => setLightbox(firstImage)}
-        >
-          <img
-            src={firstImage}
-            alt={`${portfolio.title} 1`}
-            className="w-full block"
-          />
-          {needsEdgeFix && (
-            <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: "inset 0 0 0 20px hsl(var(--background))" }} />
-          )}
-        </motion.div>
-
-        {/* Remaining images — masonry grid */}
-        {restImages.length > 0 && (
-          <div className="px-8 columns-1 sm:columns-2 lg:columns-3 gap-8 space-y-8">
-            {restImages.map((src, i) => (
-              <motion.div
-                key={src}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: (i + 1) * 0.08 }}
-                className="break-inside-avoid overflow-hidden relative cursor-pointer"
-                onClick={() => setLightbox(src)}
-              >
-                <img
-                  src={src}
-                  alt={`${portfolio.title} ${i + 2}`}
-                  className="w-full block"
-                />
-                {needsEdgeFix && (
-                  <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: "inset 0 0 0 20px hsl(var(--background))" }} />
-                )}
-              </motion.div>
-            ))}
-          </div>
-        )}
+        {/* Images — masonry grid */}
+        <div className="px-8 columns-1 sm:columns-2 lg:columns-3 gap-8 space-y-8">
+          {portfolio.images.map((src, i) => (
+            <motion.div
+              key={src}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+              className="break-inside-avoid overflow-hidden relative cursor-pointer"
+              onClick={() => setLightbox(src)}
+            >
+              <img
+                src={src}
+                alt={`${portfolio.title} ${i + 1}`}
+                className="w-full block"
+              />
+              {needsEdgeFix && (
+                <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: "inset 0 0 0 20px hsl(var(--background))" }} />
+              )}
+            </motion.div>
+          ))}
+        </div>
 
         {/* Navigation */}
         <div className="flex justify-between mt-16 pt-8 border-t border-border px-8">
