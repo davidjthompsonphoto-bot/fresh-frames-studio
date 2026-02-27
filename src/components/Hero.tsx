@@ -241,6 +241,8 @@ export default function Hero() {
             }}
             onMouseEnter={() => setHoveredIdx(i)}
             onMouseLeave={() => setHoveredIdx(null)}
+            onTouchStart={() => setHoveredIdx(i)}
+            onTouchEnd={() => setHoveredIdx(null)}
             initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}

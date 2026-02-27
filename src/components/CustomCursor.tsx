@@ -1,9 +1,12 @@
 import { useEffect, useRef } from "react";
 
+const isTouchDevice = typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches;
+
 export default function CustomCursor() {
   const dotRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (isTouchDevice) return;
     const move = (e: MouseEvent) => {
       if (!dotRef.current) return;
       dotRef.current.style.transform = `translate(${e.clientX - 12}px, ${e.clientY - 12}px)`;
@@ -11,6 +14,8 @@ export default function CustomCursor() {
     window.addEventListener("mousemove", move);
     return () => window.removeEventListener("mousemove", move);
   }, []);
+
+  if (isTouchDevice) return null;
 
   return (
     <div
