@@ -505,9 +505,13 @@ export const portfolios: Portfolio[] = [
   },
 ];
 
-// One full-res image per portfolio, for the homepage collage — all 36 stories.
-export const heroPool: { src: string; title: string; slug: string }[] = portfolios.map(p => ({
-  src: p.images[0],
-  title: p.title,
-  slug: p.slug,
-}));
+// One random high-res image per portfolio for the homepage collage.
+// Smooth Skin is excluded from the homepage pool (kept on Work page).
+export const heroPool: { src: string; title: string; slug: string }[] = portfolios
+  .filter(p => p.slug !== "smooth-skin")
+  .map(p => ({
+    // Pick a random image from the full set each time the module is evaluated
+    src: p.images[Math.floor(Math.random() * p.images.length)],
+    title: p.title,
+    slug: p.slug,
+  }));
