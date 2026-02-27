@@ -10,7 +10,7 @@ export default function Nav() {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-5 bg-background">
+    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-5 gap-8 bg-background">
       <Link to="/" className="font-display text-base font-bold tracking-[0.12em] uppercase text-foreground hover:opacity-60 transition-opacity">
         David Thompson
       </Link>
