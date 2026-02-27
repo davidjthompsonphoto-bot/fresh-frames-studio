@@ -105,6 +105,28 @@ export default function Hero() {
         className="relative w-full"
         style={{ height: `${CONTAINER_HEIGHT}px` }}
       >
+        {/* Initials — D, J, T — large, black, layered with images */}
+        {[
+          { letter: "D", left: 620, top: 80,   zIndex: 3 },
+          { letter: "J", left: 30,  top: 1020, zIndex: 2 },
+          { letter: "T", left: 750, top: 2100, zIndex: 3 },
+        ].map(({ letter, left, top, zIndex }) => (
+          <div
+            key={letter}
+            className="absolute pointer-events-none select-none font-display text-foreground leading-none"
+            style={{
+              left: `${(left / 1200) * 100}%`,
+              top,
+              zIndex,
+              fontSize: "clamp(400px, 62vw, 750px)",
+              lineHeight: 0.85,
+              fontWeight: 900,
+            }}
+          >
+            {letter}
+          </div>
+        ))}
+
         {slots.map((slot, i) => (
           <motion.div
             key={`${slot.slug}-${i}`}
