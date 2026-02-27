@@ -153,7 +153,7 @@ export default function Hero() {
                 <img
                   src={slot.src}
                   alt={slot.title}
-                  className="w-full h-auto block transition-transform duration-700 group-hover:scale-[1.02]"
+                  className="w-full h-auto block"
                 />
                 {["viva-la-linda", "please-sir"].includes(slot.slug) && (
                   <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: "inset 0 0 0 20px hsl(var(--background))" }} />
