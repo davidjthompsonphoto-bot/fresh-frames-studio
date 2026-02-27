@@ -59,7 +59,7 @@ export default function Work() {
                 <div className="absolute inset-0 bg-foreground opacity-0 group-hover:opacity-40 transition-opacity duration-300" />
                 <div className="absolute inset-0 flex items-end p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <span className="font-sans text-[0.6rem] tracking-[0.15em] uppercase text-background">
-                    {p.title}
+                    {p.client ?? p.title}
                   </span>
                 </div>
               </Link>

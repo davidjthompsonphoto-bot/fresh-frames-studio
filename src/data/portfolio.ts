@@ -4,6 +4,7 @@ export interface Portfolio {
   thumbnail: string;
   images: string[];
   caption: string;
+  client?: string;
 }
 
 export const portfolios: Portfolio[] = [
@@ -20,6 +21,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/10079154/Shot02_367_v2_670.jpg",
     ],
     caption: "Editorial featuring men's luxury watches and lingerie for international edition of The Rake Magazine. Styling and Art Direction by Sarah Ann Murray. Jewellery: H. Moser & Cie, Longines, Chopard.",
+    client: "The Rake Magazine",
   },
   {
     slug: "forty-something",
@@ -32,6 +34,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/735296/DT_French_MC_Shot002-116a%20copy.jpg",
     ],
     caption: "Doutzen Kroes in a 1940's travel-inspired editorial at Studio Rouchon, Paris for French Marie-Claire. Art Director: Philippe Gruson. Fashion: Burberry, Mulberry, Goyard.",
+    client: "French Marie-Claire",
   },
   {
     slug: "comme-un-garcon",
@@ -45,6 +48,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/733853/DT_FMC_6_Shot02_093.jpg",
     ],
     caption: "Main fashion editorial on androgynous cross dressing. Studio Rouchon, Paris for French Marie-Claire. Stylist Marie-Helene Gaultier.",
+    client: "French Marie-Claire",
   },
   {
     slug: "both-ways",
@@ -58,6 +62,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/738449/DT_FMC5_Shot03-94_5.jpg",
     ],
     caption: "Fashion editorial on wearing an item in two different ways. Studio Rouchon, Paris for French Marie-Claire. Art Director: Philippe Gruson.",
+    client: "French Marie-Claire",
   },
   {
     slug: "japonica",
@@ -73,6 +78,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/5434045/Shot04_212_v3_RGB.jpg",
     ],
     caption: "Alicia Rountree. Fashion editorial and cover shoot for Condé Nast Easy Living. Also featured in Vogue Mexico. Styling by Caroline Titcumb.",
+    client: "Condé Nast Easy Living",
   },
   {
     slug: "viva-la-linda",
@@ -88,6 +94,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/735255/Shot%2012%20023%20ok_v1.jpg",
     ],
     caption: "Late 80's / Linda Evangelista inspired fashion editorial shot in Milan for 'A' Magazine. Fashion Director Pina Gandolfi.",
+    client: "'A' Magazine",
   },
   {
     slug: "city-jungle",
@@ -103,6 +110,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/4020903/Capture%20One%20154788_v1.jpg",
     ],
     caption: "Fashion editorial and magazine cover shoot in Milan for 'A' Magazine. Fashion Director Pina Gandolfi.",
+    client: "'A' Magazine",
   },
   {
     slug: "show-pony",
@@ -117,6 +125,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/733874/20080520_Shot%2009-035_v1%20copy.jpg",
     ],
     caption: "Fashion editorial on short jackets, inspired by the movement of the model's ponytail. Studio Digitale, Milan for 'A' Magazine. Fashion Director Pina Gandolfi.",
+    client: "'A' Magazine",
   },
   {
     slug: "the-white-stuff",
@@ -129,6 +138,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/11932259/BridesColours.1_670.jpg",
     ],
     caption: "Bridal fashion editorial for Vogue Brides Magazine. Also featured in Vogue China. Styling by Bryony Toogood.",
+    client: "Vogue Brides",
   },
   {
     slug: "new-on-the-block",
@@ -141,6 +151,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/733780/09_19_Shot_07_031_v1_RGB.jpg",
     ],
     caption: "Main fashion editorial with fourteen new face models. Shot in Milan for Italian Amica Magazine. Stylist Paolo Turina.",
+    client: "Italian Amica",
   },
   {
     slug: "mlle-birkin",
@@ -155,6 +166,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/735877/SexyJackets02_036_v2.jpg",
     ],
     caption: "Fashion editorial inspired by the young Jane Birkin. Shot in Milan for 'A' Magazine. Fashion Director Pina Gandolfi. Syndicated widely.",
+    client: "'A' Magazine",
   },
   {
     slug: "me-myself-and-i",
@@ -169,6 +181,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/2207253/201109_MYSELF_BASICI_02%20049_v1.jpg",
     ],
     caption: "Main fashion editorial and cover shoot at Vogue's studio in Milan for the launch issue of Condé Nast Myself Magazine. Also featured in Vogue Japan. Fashion Director Pina Gandolfi.",
+    client: "Condé Nast Myself",
   },
   {
     slug: "the-national",
@@ -183,6 +196,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/1814188/Shot03_091_v3.jpg",
     ],
     caption: "Fashion editorial and cover, Big Sky Studios London for 'The National' Magazine Dubai. Stylist Sorrel Kinder. Fashion credits: Victoria Beckham.",
+    client: "The National",
   },
   {
     slug: "new-pants",
@@ -197,6 +211,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/5410964/Shot_11_066_v2_RGB.jpg",
     ],
     caption: "Main fashion editorial on the theme of trousers for Condé Nast Easy Living. Also featured in Vogue Mexico. Styling by Caroline Titcumb.",
+    client: "Condé Nast Easy Living",
   },
   {
     slug: "fall-forward",
@@ -213,6 +228,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/5756192/Shot012_1090%20Custom%20Name_v2_RGB.jpg",
     ],
     caption: "Main fashion editorial for Condé Nast Easy Living. Also featured in Vogue Mexico. Styling by Caroline Titcumb.",
+    client: "Condé Nast Easy Living",
   },
   {
     slug: "aventures-numeriques",
@@ -226,6 +242,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/10104897/ML.2_670.jpg",
     ],
     caption: "Lookbook and exhibition collaboration with label Modern Love. Creative Direction by Kim Hunt.",
+    client: "Modern Love",
   },
   {
     slug: "eugenia-silva",
@@ -243,6 +260,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/10096199/Donna_Simple_Chic_M03_390-1_v3_670.jpg",
     ],
     caption: "Classic supermodel Eugenia Silva for Donna Magazine. Styling by Sandra Krutzsch.",
+    client: "Donna",
   },
   {
     slug: "safari",
@@ -256,6 +274,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/839089/Amica-Safari-6_v1.jpg",
     ],
     caption: "Supermodel Liya Kebede at Pier 59 Studios New York for Italian Amica Magazine. Stylist Paolo Turina.",
+    client: "Italian Amica",
   },
   {
     slug: "mother-lover-rocker",
@@ -270,6 +289,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/2873441/20120110_MYSELF_FASHION_10-017_v2.jpg",
     ],
     caption: "Fashion editorial on the different roles a woman plays in her life. Vogue's studio, Milan for Condé Nast Myself Magazine. Fashion Director Pina Gandolfi.",
+    client: "Condé Nast Myself",
   },
   {
     slug: "and-starring",
@@ -285,6 +305,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/9532134/Shot013_008_v2_670.jpg",
     ],
     caption: "Bridal fashion editorial work for Condé Nast Brides Magazine. Also featured in Vogue China. Styling by Bryony Toogood.",
+    client: "Condé Nast Brides",
   },
   {
     slug: "red-army",
@@ -297,6 +318,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/10914871/DonnaMilitary-10_670.jpg",
     ],
     caption: "Dada Held photographed in Munich for Donna Magazine. Styling by Sandra Krutzsch.",
+    client: "Donna",
   },
   {
     slug: "please-sir",
@@ -311,6 +333,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/735805/Shot%2009%20010%20ok_v1%20copy.jpg",
     ],
     caption: "Main fashion editorial inspired by the legacy of Bob Fosse and Cabaret. Shot in Milan for 'A' Magazine. Fashion Director Pina Gandolfi.",
+    client: "'A' Magazine",
   },
   {
     slug: "boogie-nights",
@@ -322,6 +345,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/733733/20080521_Image%2007-041_v5folio.jpg",
     ],
     caption: "Main fashion editorial inspired by the golden age of Studio 54. Shot in Milan for Italian 'A' Magazine.",
+    client: "'A' Magazine",
   },
   {
     slug: "spare-our-blushes",
@@ -335,6 +359,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/12592395/Untitled-3_670.jpg",
     ],
     caption: "Bridal fashion editorial for Condé Nast Brides Magazine. Also featured in Vogue Japan. Fashion Director Bryony Toogood.",
+    client: "Condé Nast Brides",
   },
   {
     slug: "the-remix",
@@ -348,6 +373,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/12227351/Untitled-4_670.jpg",
     ],
     caption: "Bridal fashion editorial for Condé Nast Brides Magazine. Also featured in Vogue Japan. Styling by Bryony Toogood.",
+    client: "Condé Nast Brides",
   },
   {
     slug: "beauty",
@@ -374,6 +400,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/740879/DT_RED_04.jpg",
     ],
     caption: "Fashion story for RED Magazine, on the theme of holiday wardrobe selection.",
+    client: "RED Magazine",
   },
   {
     slug: "smooth-skin",
@@ -384,6 +411,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/8273254/SMOOTHSKINFORMEN_PACKAGING3D_670.jpg",
     ],
     caption: "Launch advertising campaign and packaging for Smooth Skin Gold. Art Direction and Design by Camilla Lillieskold at CLDA.",
+    client: "Smooth Skin Gold",
   },
   {
     slug: "ines-sastre",
@@ -397,6 +425,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/6871263/Shot07_127_v5_RGB.jpg",
     ],
     caption: "Ines Sastre. Fashion editorial and magazine cover shoot in London for Donna. Brands: Bulgari, Gucci, Celine.",
+    client: "Donna",
   },
   {
     slug: "queriot-jewellery",
@@ -408,6 +437,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/10096436/adv-pilota-205x265-01-6_670.jpg",
     ],
     caption: "Advertising campaign for Queriot Jewellery Milan. Art Direction by Hugo de Carvalho.",
+    client: "Queriot Jewellery",
   },
   {
     slug: "high-street-hits",
@@ -422,6 +452,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/5132038/121124_DT_TOTB_SHOT02_095_v2.jpg",
     ],
     caption: "Affordable fashion editorial for Condé Nast Easy Living. Fashion Director Liz Thody. Also featured in Vogue Mexico.",
+    client: "Condé Nast Easy Living",
   },
   {
     slug: "only-yfke",
@@ -434,6 +465,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/6277363/Donna_9_M08_012_v3_RGB.jpg",
     ],
     caption: "Fashion editorial and magazine cover shoot for Donna in Munich, with model Yfke Sturm.",
+    client: "Donna",
   },
   {
     slug: "entrenched",
@@ -446,6 +478,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/735180/TRENCH11_027_v1.jpg",
     ],
     caption: "Fashion editorial featuring the classic Burberry trench coat. Studio Digitale, Milan for 'A' Magazine. Fashion Director Pina Gandolfi.",
+    client: "'A' Magazine",
   },
   {
     slug: "blocked-out",
@@ -460,6 +493,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/905195/Redmag_151210_723_v1.jpg",
     ],
     caption: "Main fashion editorial for RED Magazine featuring the concept of blocks of colour.",
+    client: "RED Magazine",
   },
   {
     slug: "nonconformist",
@@ -477,6 +511,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/6457096/Shot02_053_v4_New.jpg",
     ],
     caption: "Condé Nast Brides Magazine main fashion editorial and cover. Fashion Editor Bryony Toogood.",
+    client: "Condé Nast Brides",
   },
   {
     slug: "miss-shapes",
@@ -489,6 +524,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/2545113/Shot09_163_v3.jpg",
     ],
     caption: "Main fashion editorial for 'The National' Magazine Dubai. Stylist Sorrel Kinder.",
+    client: "The National",
   },
   {
     slug: "sports-day",
@@ -502,6 +538,7 @@ export const portfolios: Portfolio[] = [
       "https://payload.cargocollective.com/1/1/60539/738575/French%20M-C-07_fin.jpg",
     ],
     caption: "Sports Lux fashion editorial shot in Paris for French Marie-Claire.",
+    client: "French Marie-Claire",
   },
 ];
 
