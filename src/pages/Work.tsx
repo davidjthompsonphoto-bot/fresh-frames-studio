@@ -53,7 +53,7 @@ export default function Work() {
                     style={{ objectPosition: objectPosition[p.slug] ?? "center" }}
                   />
                   {REMOVE_EDGE_SLUGS.has(p.slug) && (
-                    <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: "inset 0 0 0 4px hsl(var(--background))" }} />
+                    <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: "inset 0 0 0 20px hsl(var(--background))" }} />
                   )}
                 </div>
                 

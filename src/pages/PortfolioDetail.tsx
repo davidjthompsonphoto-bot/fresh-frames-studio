@@ -61,7 +61,7 @@ export default function PortfolioDetail() {
                 className="w-full block"
               />
               {["viva-la-linda", "please-sir"].includes(portfolio.slug) && (
-                <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: "inset 0 0 0 6px hsl(var(--background))" }} />
+                <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: "inset 0 0 0 20px hsl(var(--background))" }} />
               )}
             </motion.div>
           ))}
