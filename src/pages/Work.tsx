@@ -19,6 +19,9 @@ const objectPosition: Record<string, string> = {
   "mlle-birkin":  "95% center",
 };
 
+// Slugs whose images have baked-in black edges — use inset shadow to hide them
+const REMOVE_EDGE_SLUGS = new Set(["viva-la-linda", "please-sir"]);
+
 export default function Work() {
   const randomised = useMemo(() => shuffle(portfolios), []);
   return (
@@ -42,13 +45,16 @@ export default function Work() {
               transition={{ duration: 0.4, delay: i * 0.03 }}
             >
               <Link to={`/work/${p.slug}`} className="group block relative overflow-hidden">
-                <div className="aspect-[3/4] overflow-hidden bg-background">
+                <div className="aspect-[3/4] overflow-hidden bg-background relative">
                   <img
                     src={p.images[0]}
                     alt={p.title}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     style={{ objectPosition: objectPosition[p.slug] ?? "center" }}
                   />
+                  {REMOVE_EDGE_SLUGS.has(p.slug) && (
+                    <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: "inset 0 0 0 4px hsl(var(--background))" }} />
+                  )}
                 </div>
                 <div className="absolute inset-0 bg-foreground opacity-0 group-hover:opacity-40 transition-opacity duration-300" />
                 <div className="absolute inset-0 flex items-end p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
