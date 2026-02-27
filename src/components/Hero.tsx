@@ -28,45 +28,39 @@ interface ClusterSlot {
 // Hand-crafted clusters of overlapping images.
 // Container is 100% width; we use absolute px values that scale via a transform.
 // Each cluster has 2-4 slots. We spread clusters vertically so the page scrolls.
-// Images are placed at absolute positions. Adjacent clusters overlap vertically
-// so images from different rows interleave. zIndex controls what sits on top.
+// Images placed in loose groups with generous white space.
+// Adjacent groups nudge into each other only slightly (~80-120px overlap).
 const CLUSTERS: ClusterSlot[][] = [
-  // Cluster 1
+  // Cluster 1 — wide landscape left, small portrait right
   [
-    { left: 20,   top: 0,    width: 500, zIndex: 2 },
-    { left: 460,  top: 80,   width: 320, zIndex: 3 },
-    { left: 700,  top: 30,   width: 400, zIndex: 1 },
+    { left: 30,   top: 0,    width: 520, zIndex: 1 },
+    { left: 720,  top: 60,   width: 300, zIndex: 2 },
   ],
-  // Cluster 2 — overlaps cluster 1 by ~200px
+  // Cluster 2 — offset right, slight vertical nudge into cluster 1
   [
-    { left: 30,   top: 480,  width: 300, zIndex: 4 },
-    { left: 270,  top: 420,  width: 520, zIndex: 2 },
-    { left: 740,  top: 460,  width: 360, zIndex: 5 },
-    { left: 1020, top: 390,  width: 230, zIndex: 3 },
+    { left: 140,  top: 580,  width: 340, zIndex: 2 },
+    { left: 520,  top: 520,  width: 500, zIndex: 1 },
   ],
-  // Cluster 3 — overlaps cluster 2
+  // Cluster 3 — three images, generous gaps
   [
-    { left: 10,   top: 880,  width: 440, zIndex: 3 },
-    { left: 380,  top: 960,  width: 300, zIndex: 5 },
-    { left: 600,  top: 840,  width: 460, zIndex: 2 },
-    { left: 980,  top: 900,  width: 260, zIndex: 4 },
+    { left: 20,   top: 1160, width: 300, zIndex: 1 },
+    { left: 380,  top: 1100, width: 440, zIndex: 2 },
+    { left: 860,  top: 1140, width: 280, zIndex: 1 },
   ],
-  // Cluster 4 — overlaps cluster 3
+  // Cluster 4 — large centred image with small companion
   [
-    { left: 80,   top: 1320, width: 360, zIndex: 2 },
-    { left: 380,  top: 1240, width: 520, zIndex: 4 },
-    { left: 840,  top: 1280, width: 380, zIndex: 3 },
+    { left: 60,   top: 1740, width: 560, zIndex: 1 },
+    { left: 680,  top: 1800, width: 320, zIndex: 2 },
   ],
-  // Cluster 5 — overlaps cluster 4
+  // Cluster 5 — scattered trio
   [
-    { left: 20,   top: 1700, width: 280, zIndex: 4 },
-    { left: 260,  top: 1640, width: 480, zIndex: 2 },
-    { left: 660,  top: 1680, width: 340, zIndex: 5 },
-    { left: 920,  top: 1620, width: 300, zIndex: 3 },
+    { left: 10,   top: 2360, width: 280, zIndex: 2 },
+    { left: 340,  top: 2300, width: 460, zIndex: 1 },
+    { left: 840,  top: 2340, width: 320, zIndex: 2 },
   ],
 ];
 
-const CONTAINER_HEIGHT = 2200; // px
+const CONTAINER_HEIGHT = 2900; // px
 
 export default function Hero() {
   const slots = useMemo(() => {
