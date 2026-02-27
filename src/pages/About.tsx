@@ -43,14 +43,14 @@ export default function About() {
 
             <div>
               <h3 className="font-display text-2xl tracking-widest text-foreground mb-3">MAGAZINE CREDITS</h3>
-              <p className="font-sans text-xs tracking-wide leading-relaxed text-foreground opacity-60">
+              <p className="font-serif text-sm leading-relaxed text-foreground opacity-60">
                 Vogue Germany, Vogue Japan, Vogue Brazil, Vogue China, Vogue Hellas, Vogue Mexico, Vogue Gioello, Vogue Italia, Myself (Condé Nast) Italy, Easy Living (Condé Nast) UK, Brides (Condé Nast) UK, The Rake (International Edition), French Marie-Claire, Spanish Marie-Claire, Japanese Marie-Claire, Italian Amica, Jalouse (France), West-East (Hong Kong), InStyle UK, The National (Dubai), Glamour Mexico, RED UK, Elle Sweden, Donna, New York Times Sunday Magazine
               </p>
             </div>
 
             <div>
               <h3 className="font-display text-2xl tracking-widest text-foreground mb-3">CLIENT CREDITS</h3>
-              <p className="font-sans text-xs tracking-wide leading-relaxed text-foreground opacity-60">
+              <p className="font-serif text-sm leading-relaxed text-foreground opacity-60">
                 Adidas, Swarovski, L'Oreal, Wella, EMI, Hirsh Jewellery, Marks & Spencer, The White Company, Random House, Lara Bohinc, The Royal Family of Jordan
               </p>
             </div>
