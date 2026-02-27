@@ -1,9 +1,28 @@
 import { motion } from "framer-motion";
 import Nav from "@/components/Nav";
+import SEO from "@/components/SEO";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "@id": "https://davidthompsonphotography.com/about#webpage",
+  "url": "https://davidthompsonphotography.com/about",
+  "name": "About David Thompson — Fashion & Beauty Photographer",
+  "isPartOf": { "@id": "https://davidthompsonphotography.com/#website" },
+  "about": { "@id": "https://davidthompsonphotography.com/#person" },
+  "description": "About David Thompson — multi award-winning London fashion and beauty photographer with work in Vogue, The New York Times Magazine, and The National Portrait Gallery.",
+};
 
 export default function About() {
   return (
     <div className="bg-background min-h-screen">
+      <SEO
+        title="About — David Thompson Photography"
+        description="David Thompson grew up with a camera and has travelled the world as a specialist studio photographer. Work in Vogue, The New York Times Magazine, and held in The National Portrait Gallery."
+        canonicalPath="/about"
+        ogImage="https://payload.cargocollective.com/1/1/60539/719151/DT_new_670.jpg"
+        jsonLd={jsonLd}
+      />
       <Nav />
       <main className="pt-24 px-8 pb-24 max-w-5xl">
         <motion.h2
@@ -23,7 +42,7 @@ export default function About() {
           >
             <img
               src="https://payload.cargocollective.com/1/1/60539/719151/DT_new_670.jpg"
-              alt="David Thompson"
+              alt="David Thompson, fashion and beauty photographer based in London"
               className="w-full object-cover"
             />
           </motion.div>

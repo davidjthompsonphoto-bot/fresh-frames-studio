@@ -1,7 +1,8 @@
 import { useParams, Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Nav from "@/components/Nav";
+import SEO from "@/components/SEO";
 import { portfolios } from "@/data/portfolio";
 
 export default function PortfolioDetail() {
@@ -23,6 +24,17 @@ export default function PortfolioDetail() {
   // Record this story as the last visited
   useEffect(() => { sessionStorage.setItem("lastVisitedStory", slug ?? ""); }, [slug]);
 
+  const jsonLd = useMemo(() => portfolio ? ({
+    "@context": "https://schema.org",
+    "@type": "ImageGallery",
+    "@id": `https://davidthompsonphotography.com/work/${portfolio.slug}#webpage`,
+    "url": `https://davidthompsonphotography.com/work/${portfolio.slug}`,
+    "name": `${portfolio.title} — David Thompson Photography`,
+    "description": portfolio.caption || `${portfolio.title} — fashion and beauty photography by David Thompson.`,
+    "author": { "@id": "https://davidthompsonphotography.com/#person" },
+    "image": portfolio.images.slice(0, 3).map(src => ({ "@type": "ImageObject", "url": src })),
+  }) : null, [portfolio]);
+
   if (!portfolio) {
     return (
       <div className="bg-background min-h-screen">
@@ -40,6 +52,14 @@ export default function PortfolioDetail() {
 
   return (
     <div className="bg-background min-h-screen">
+      <SEO
+        title={`${portfolio.title} — David Thompson Photography`}
+        description={portfolio.caption || `${portfolio.title} — fashion and beauty photography by David Thompson.`}
+        canonicalPath={`/work/${portfolio.slug}`}
+        ogImage={portfolio.images[0]}
+        ogType="article"
+        jsonLd={jsonLd ?? undefined}
+      />
       <Nav />
 
       {/* Lightbox */}
