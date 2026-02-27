@@ -53,13 +53,16 @@ export default function PortfolioDetail() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="break-inside-avoid overflow-hidden"
+              className="break-inside-avoid overflow-hidden relative"
             >
               <img
                 src={src}
                 alt={`${portfolio.title} ${i + 1}`}
                 className="w-full block"
               />
+              {["viva-la-linda", "please-sir"].includes(portfolio.slug) && (
+                <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: "inset 0 0 0 6px hsl(var(--background))" }} />
+              )}
             </motion.div>
           ))}
         </div>
