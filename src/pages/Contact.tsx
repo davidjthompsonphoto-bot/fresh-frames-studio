@@ -9,7 +9,7 @@ export default function Contact() {
       <img
         src={contactFullbleed}
         alt="David Thompson"
-        className="fixed inset-0 w-full h-full object-cover object-center"
+        className="fixed inset-0 w-full h-full object-cover object-top"
         style={{ zIndex: 0 }}
       />
       {/* Subtle dark overlay for text legibility */}
