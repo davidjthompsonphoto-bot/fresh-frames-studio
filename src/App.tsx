@@ -31,6 +31,7 @@ function AnimatedRoutes() {
         <Route path="/" element={<PageTransition><Index /></PageTransition>} />
         <Route path="/work" element={<PageTransition><Work /></PageTransition>} />
         <Route path="/work/:slug" element={<PageTransition><PortfolioDetail /></PageTransition>} />
+        <Route path="/admin/beauty-reorder" element={<BeautyReorder />} />
         <Route path="/about" element={<PageTransition><About /></PageTransition>} />
         <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
         <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
