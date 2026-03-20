@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Nav from "@/components/Nav";
+
 import SEO from "@/components/SEO";
 import { portfolios } from "@/data/portfolio";
 

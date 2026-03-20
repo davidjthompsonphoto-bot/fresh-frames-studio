@@ -35,7 +35,6 @@ export default function About() {
       
 
       <div className="relative" style={{ zIndex: 2 }}>
-        <Nav />
         <main className="pt-24 px-8 pb-24 max-w-5xl">
           <motion.h2
             className="font-display text-[clamp(3rem,8vw,8rem)] leading-none tracking-tight text-white mb-12"

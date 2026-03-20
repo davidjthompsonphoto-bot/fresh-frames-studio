@@ -58,7 +58,6 @@ export default function Index() {
   return (
     <div className="bg-background min-h-screen">
       <SEO canonicalPath="/" jsonLd={jsonLd} />
-      <Nav />
       <main className="pt-20">
         <Hero />
       </main>

@@ -42,7 +42,6 @@ export default function Work() {
         canonicalPath="/work"
         jsonLd={jsonLd}
       />
-      <Nav />
       <main className="pt-24 px-8 pb-16">
         <motion.h2
           className="font-display text-[clamp(3rem,8vw,8rem)] leading-none tracking-tight text-foreground mb-12"
