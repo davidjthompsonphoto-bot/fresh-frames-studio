@@ -24,6 +24,10 @@ export default function BeautyReorder() {
     dragOverIndex.current = null;
   };
 
+  const handleRemove = (i: number) => {
+    setImages(prev => prev.filter((_, idx) => idx !== i));
+  };
+
   const handleCopy = () => {
     const text = images.map(url => `      "${url}",`).join("\n");
     navigator.clipboard.writeText(text).then(() => {
@@ -37,7 +41,7 @@ export default function BeautyReorder() {
       <div className="max-w-5xl mx-auto">
         <h1 className="font-display text-3xl uppercase tracking-widest mb-2">Reorder Beauty Images</h1>
         <p className="font-sans text-xs tracking-widest uppercase text-neutral-400 mb-8">
-          Drag images into the order you want, then click "Copy New Order" and paste it in the chat.
+          Drag to reorder · Click <strong>✕</strong> to remove · Then copy and paste into chat.
         </p>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mb-10">
