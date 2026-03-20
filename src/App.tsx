@@ -49,6 +49,7 @@ const App = () => (
       <BrowserRouter basename={import.meta.env.BASE_URL}>
         <ScrollToTop />
         <CustomCursor />
+        <Nav />
         <AnimatedRoutes />
       </BrowserRouter>
     </TooltipProvider>
