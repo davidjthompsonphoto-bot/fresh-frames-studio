@@ -32,7 +32,7 @@ export default function Nav() {
     >
       <Link
         to="/"
-        className="font-display text-sm sm:text-base font-bold tracking-[0.12em] uppercase transition-colors duration-150 hover:text-[hsl(0,100%,50%)] hover:opacity-100 leading-tight"
+        className="font-display text-sm sm:text-base font-bold tracking-[0.12em] uppercase transition-opacity duration-150 hover:opacity-100 leading-tight"
       >
         David Thompson
       </Link>
