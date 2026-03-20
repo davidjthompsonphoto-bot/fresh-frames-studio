@@ -127,15 +127,15 @@ export default function PortfolioDetail() {
           ) : <div />}
         </div>
 
-        {/* Images — masonry grid */}
-        <div className="px-8 columns-1 sm:columns-2 lg:columns-3 gap-8 space-y-8">
+        {/* Images — grid */}
+        <div className="px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {portfolio.images.map((src, i) => (
             <motion.div
               key={src}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="break-inside-avoid overflow-hidden relative cursor-pointer"
+              className="overflow-hidden relative cursor-pointer"
               onClick={() => setLightbox(src)}
             >
               <img
