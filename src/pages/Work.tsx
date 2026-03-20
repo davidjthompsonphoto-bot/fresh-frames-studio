@@ -76,12 +76,12 @@ export default function Work() {
                 </div>
                 
                 <div className="absolute inset-0 flex items-end p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="font-sans text-[0.6rem] tracking-[0.15em] uppercase text-background">
+                   <span className="font-sans text-[0.9rem] sm:text-[0.6rem] tracking-[0.15em] uppercase text-background">
                     {p.client ?? p.title}
                   </span>
                 </div>
               </Link>
-              <p className="font-sans text-[0.6rem] tracking-[0.12em] uppercase text-foreground opacity-40 mt-1 px-0.5 truncate">
+              <p className="font-sans text-[0.9rem] sm:text-[0.6rem] tracking-[0.12em] uppercase text-foreground opacity-40 mt-1 px-0.5 truncate">
                 {p.title}
               </p>
             </motion.div>
