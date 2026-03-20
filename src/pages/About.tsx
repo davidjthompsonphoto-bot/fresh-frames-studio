@@ -1,5 +1,4 @@
-import { motion, useAnimationControls } from "framer-motion";
-import { useEffect } from "react";
+import { motion } from "framer-motion";
 import Nav from "@/components/Nav";
 import SEO from "@/components/SEO";
 import aboutFullbleed from "@/assets/about-fullbleed.jpg";
@@ -14,81 +13,6 @@ const jsonLd = {
   "about": { "@id": "https://davidthompsonphotography.com/#person" },
   "description": "About David Thompson — multi award-winning London fashion and beauty photographer with work in Vogue, The New York Times Magazine, and The National Portrait Gallery.",
 };
-
-// Eyelid blink overlay — upper lid descends and retracts on a natural blink cycle
-function BlinkOverlay() {
-  const controls = useAnimationControls();
-
-  useEffect(() => {
-    let cancelled = false;
-
-    async function blinkLoop() {
-      while (!cancelled) {
-        // Wait 4–6 seconds between blinks (vary naturally)
-        const delay = 4500 + Math.random() * 2000;
-        await new Promise(r => setTimeout(r, delay));
-        if (cancelled) break;
-
-        // Close eye (lid sweeps down)
-        await controls.start({
-          scaleY: 1,
-          transition: { duration: 0.07, ease: "easeIn" },
-        });
-        // Hold closed briefly
-        await new Promise(r => setTimeout(r, 60));
-        if (cancelled) break;
-
-        // Open eye (lid retracts)
-        await controls.start({
-          scaleY: 0,
-          transition: { duration: 0.1, ease: "easeOut" },
-        });
-      }
-    }
-
-    blinkLoop();
-    return () => { cancelled = true; };
-  }, [controls]);
-
-  return (
-    <>
-      {/* Upper eyelid */}
-      <motion.div
-        animate={controls}
-        initial={{ scaleY: 0 }}
-        className="fixed pointer-events-none"
-        style={{
-          // Positioned over the model's eye — tuned to the about-fullbleed image
-          left: "62.5%",
-          top: "41.5%",
-          width: "22vw",
-          height: "16vh",
-          // Arc shape matching the natural upper lid curve
-          borderRadius: "45% 45% 55% 55%",
-          background: "linear-gradient(to bottom, #0c0509 60%, #150a10)",
-          transformOrigin: "top center",
-          zIndex: 1,
-        }}
-      />
-      {/* Lower eyelid — subtle upward rise to meet upper lid */}
-      <motion.div
-        animate={controls}
-        initial={{ scaleY: 0 }}
-        className="fixed pointer-events-none"
-        style={{
-          left: "62.5%",
-          top: "55%",
-          width: "22vw",
-          height: "6vh",
-          borderRadius: "55% 55% 45% 45%",
-          background: "linear-gradient(to top, #0c0509 60%, #150a10)",
-          transformOrigin: "bottom center",
-          zIndex: 1,
-        }}
-      />
-    </>
-  );
-}
 
 export default function About() {
   return (
@@ -108,9 +32,8 @@ export default function About() {
         className="fixed inset-0 w-full h-full object-cover object-top"
         style={{ zIndex: 0 }}
       />
-
-      {/* Blink animation overlay */}
-      <BlinkOverlay />
+      {/* Dark overlay for text legibility */}
+      
 
       <div className="relative" style={{ zIndex: 2 }}>
         <Nav />
