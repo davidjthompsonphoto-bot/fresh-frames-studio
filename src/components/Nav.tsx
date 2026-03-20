@@ -58,7 +58,7 @@ export default function Nav() {
                 <li key={to}>
                   <Link
                     to={to}
-                    className="font-sans text-[0.6rem] tracking-[0.2em] uppercase hover:opacity-100 transition-opacity"
+                    className="font-sans text-[0.9rem] sm:text-[0.6rem] tracking-[0.2em] uppercase hover:opacity-100 transition-opacity"
                     style={{ opacity: 0.6 }}
                     onClick={() => setOpen(false)}
                   >
