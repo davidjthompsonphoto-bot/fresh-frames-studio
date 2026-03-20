@@ -85,7 +85,7 @@ export default function Nav() {
       <Link
         to="/"
         className="font-display text-sm sm:text-base font-bold tracking-[0.12em] uppercase transition-opacity duration-150 leading-tight"
-        style={{ opacity: nameHovered ? 1 : 0.4 }}
+        style={{ opacity: nameHovered ? 1 : 0.4, WebkitTouchCallout: "none" } as React.CSSProperties}
         onMouseEnter={() => setNameHovered(true)}
         onMouseLeave={() => setNameHovered(false)}
       >
