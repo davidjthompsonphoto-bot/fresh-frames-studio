@@ -94,6 +94,7 @@ export default function Nav() {
       <ul className="flex gap-4 sm:gap-8">
         {/* Work with dropdown */}
         <li
+          ref={dropdownRef}
           className="relative"
           onMouseEnter={() => { handleMouseEnter(); setWorkHovered(true); }}
           onMouseLeave={() => { handleMouseLeave(); setWorkHovered(false); }}
