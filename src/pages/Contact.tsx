@@ -17,6 +17,12 @@ const jsonLd = {
 export default function Contact() {
   return (
     <div className="relative min-h-screen">
+      <SEO
+        title="Contact — David Thompson Photography"
+        description="Commission David Thompson for fashion, beauty, bridal or luxury advertising photography. Based in London, available for international commissions."
+        canonicalPath="/contact"
+        jsonLd={jsonLd}
+      />
       {/* Full bleed background image */}
       <img
         src={contactFullbleed}
