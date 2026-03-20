@@ -13,6 +13,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import CustomCursor from "./components/CustomCursor";
+import Nav from "./components/Nav";
 import PageTransition from "./components/PageTransition";
 
 const queryClient = new QueryClient();
@@ -48,6 +49,7 @@ const App = () => (
       <BrowserRouter basename={import.meta.env.BASE_URL}>
         <ScrollToTop />
         <CustomCursor />
+        <Nav />
         <AnimatedRoutes />
       </BrowserRouter>
     </TooltipProvider>

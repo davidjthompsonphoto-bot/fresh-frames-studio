@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
+import type React from "react";
 
 const WORK_DROPDOWN = [
   { to: "/work/beauty", label: "Beauty" },
@@ -14,7 +15,7 @@ function NavLink({ to, children, baseOpacity }: { to: string; children: React.Re
     <Link
       to={to}
       className="font-sans text-[0.75rem] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase transition-opacity duration-150"
-      style={{ opacity: hovered ? 1 : baseOpacity }}
+      style={{ opacity: hovered ? 1 : baseOpacity, WebkitTouchCallout: "none" } as React.CSSProperties}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -31,7 +32,7 @@ function ExternalNavLink({ href, children }: { href: string; children: React.Rea
       target="_blank"
       rel="noopener noreferrer"
       className="font-sans text-[0.75rem] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase transition-opacity duration-150"
-      style={{ opacity: hovered ? 1 : 0.4 }}
+      style={{ opacity: hovered ? 1 : 0.4, WebkitTouchCallout: "none" } as React.CSSProperties}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -85,7 +86,7 @@ export default function Nav() {
       <Link
         to="/"
         className="font-display text-sm sm:text-base font-bold tracking-[0.12em] uppercase transition-opacity duration-150 leading-tight"
-        style={{ opacity: nameHovered ? 1 : 0.4 }}
+        style={{ opacity: nameHovered ? 1 : 0.4, WebkitTouchCallout: "none" } as React.CSSProperties}
         onMouseEnter={() => setNameHovered(true)}
         onMouseLeave={() => setNameHovered(false)}
       >
@@ -102,7 +103,7 @@ export default function Nav() {
           <Link
             to="/work"
             className="font-sans text-[0.75rem] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase transition-opacity duration-150"
-            style={{ opacity: workHovered ? 1 : getOpacity(pathname, "/work") }}
+            style={{ opacity: workHovered ? 1 : getOpacity(pathname, "/work"), WebkitTouchCallout: "none" } as React.CSSProperties}
             onClick={() => setOpen(false)}
           >
             Work

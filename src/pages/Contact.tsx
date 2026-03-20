@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import Nav from "@/components/Nav";
 import SEO from "@/components/SEO";
 import contactFullbleed from "@/assets/contact-fullbleed.jpg";
 
@@ -34,7 +33,6 @@ export default function Contact() {
       
 
       <div className="relative" style={{ zIndex: 2 }}>
-        <Nav />
         <main className="pt-24 px-8 pb-24">
           <motion.h2
             className="font-display text-[clamp(3rem,8vw,8rem)] leading-none tracking-tight text-white mb-16"
