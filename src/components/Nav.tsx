@@ -15,7 +15,7 @@ function NavLink({ to, children, baseOpacity }: { to: string; children: React.Re
     <Link
       to={to}
       className="font-sans text-[0.75rem] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase transition-opacity duration-150"
-      style={{ opacity: hovered ? 1 : baseOpacity, WebkitTouchCallout: "none" }}
+      style={{ opacity: hovered ? 1 : baseOpacity, WebkitTouchCallout: "none" } as React.CSSProperties}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
