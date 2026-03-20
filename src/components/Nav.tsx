@@ -103,6 +103,7 @@ export default function Nav() {
             to="/work"
             className="font-sans text-[0.75rem] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase transition-opacity duration-150"
             style={{ opacity: workHovered ? 1 : getOpacity(pathname, "/work") }}
+            onClick={() => setOpen(false)}
           >
             Work
           </Link>
