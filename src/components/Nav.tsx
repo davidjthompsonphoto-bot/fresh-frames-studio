@@ -85,7 +85,7 @@ export default function Nav() {
         <li>
           <Link
             to="/contact"
-            className="font-sans text-[0.975rem] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase hover:opacity-60"
+            className="font-sans text-[0.75rem] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase hover:opacity-60"
             style={{ opacity: getOpacity(pathname, "/contact") }}
           >
             Contact
