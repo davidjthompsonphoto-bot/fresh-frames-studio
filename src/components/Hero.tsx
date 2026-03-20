@@ -193,7 +193,7 @@ export default function Hero() {
           DAVID<br />THOMPSON
         </motion.h1>
         <motion.p
-          className="font-serif italic text-[clamp(1rem,1.6vw,1.35rem)] text-foreground/70 mt-3 ml-1 tracking-widest"
+          className="font-sans text-[clamp(1rem,1.6vw,1.35rem)] text-foreground/70 mt-3 ml-1 tracking-widest"
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.7 }}
           transition={{ duration: 0.7, delay: 0.3 }}
