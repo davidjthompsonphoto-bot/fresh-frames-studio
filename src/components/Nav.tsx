@@ -24,7 +24,7 @@ export default function Nav() {
 
   return (
     <nav
-      className="fixed top-0 left-0 right-0 z-[500] flex flex-col items-start gap-1 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-8 sm:py-5 sm:gap-8"
+      className="fixed top-0 left-0 right-0 z-[500] flex flex-col items-start gap-1 px-4 py-3 sm:flex-row sm:items-center sm:justify-end sm:px-8 sm:py-5 sm:gap-8"
       style={{ mixBlendMode: "difference", color: "white" }}
     >
       <Link
