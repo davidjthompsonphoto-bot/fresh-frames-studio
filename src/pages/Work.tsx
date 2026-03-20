@@ -1,7 +1,6 @@
 import { useMemo } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import Nav from "@/components/Nav";
 import SEO from "@/components/SEO";
 import { portfolios } from "@/data/portfolio";
 

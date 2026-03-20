@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import Nav from "@/components/Nav";
 import SEO from "@/components/SEO";
 import contactFullbleed from "@/assets/contact-fullbleed.jpg";
 
