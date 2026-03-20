@@ -32,7 +32,7 @@ function ExternalNavLink({ href, children }: { href: string; children: React.Rea
       target="_blank"
       rel="noopener noreferrer"
       className="font-sans text-[0.75rem] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase transition-opacity duration-150"
-      style={{ opacity: hovered ? 1 : 0.4, WebkitTouchCallout: "none" }}
+      style={{ opacity: hovered ? 1 : 0.4, WebkitTouchCallout: "none" } as React.CSSProperties}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
