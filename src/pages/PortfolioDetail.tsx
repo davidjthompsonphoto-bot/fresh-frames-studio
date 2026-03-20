@@ -74,7 +74,7 @@ export default function PortfolioDetail() {
             onClick={() => setLightbox(null)}
           >
             <button
-              className="absolute top-6 right-8 font-sans text-[0.6rem] tracking-[0.25em] uppercase text-foreground opacity-50 hover:opacity-100 transition-opacity"
+              className="absolute top-6 right-8 font-sans text-[0.9rem] sm:text-[0.6rem] tracking-[0.25em] uppercase text-foreground opacity-50 hover:opacity-100 transition-opacity"
               onClick={() => setLightbox(null)}
             >
               Close
@@ -105,7 +105,7 @@ export default function PortfolioDetail() {
             {portfolio.title}
           </h2>
           {portfolio.caption && (
-            <p className="font-sans text-[clamp(0.5rem,0.8vw,0.675rem)] text-foreground/70 mt-3 ml-1 tracking-widest uppercase">
+            <p className="font-sans text-[0.75rem] sm:text-[clamp(0.5rem,0.8vw,0.675rem)] text-foreground/70 mt-3 ml-1 tracking-widest uppercase">
               {portfolio.caption}
             </p>
           )}
@@ -115,13 +115,13 @@ export default function PortfolioDetail() {
         <div className="flex flex-col sm:flex-row sm:justify-between gap-6 mb-10 pb-8 border-b border-border px-8">
           {prev ? (
             <Link to={`/work/${prev.slug}`} className="group flex flex-col gap-1">
-              <span className="font-sans text-[0.55rem] tracking-[0.2em] uppercase text-foreground opacity-40 group-hover:opacity-100 transition-opacity">← Previous</span>
+              <span className="font-sans text-[0.825rem] sm:text-[0.55rem] tracking-[0.2em] uppercase text-foreground opacity-40 group-hover:opacity-100 transition-opacity">← Previous</span>
               <span className="font-display text-xl tracking-widest text-foreground uppercase">{prev.title}</span>
             </Link>
           ) : <div />}
           {next ? (
             <Link to={`/work/${next.slug}`} className="group flex flex-col gap-1 sm:items-end sm:text-right">
-              <span className="font-sans text-[0.55rem] tracking-[0.2em] uppercase text-foreground opacity-40 group-hover:opacity-100 transition-opacity">Next →</span>
+              <span className="font-sans text-[0.825rem] sm:text-[0.55rem] tracking-[0.2em] uppercase text-foreground opacity-40 group-hover:opacity-100 transition-opacity">Next →</span>
               <span className="font-display text-xl tracking-widest text-foreground uppercase">{next.title}</span>
             </Link>
           ) : <div />}
