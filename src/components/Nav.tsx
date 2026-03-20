@@ -91,6 +91,19 @@ export default function Nav() {
             Contact
           </Link>
         </li>
+
+        {/* Portraits - external */}
+        <li>
+          <a
+            href="https://davidthompsonportraits.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-sans text-[0.75rem] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase hover:opacity-60"
+            style={{ opacity: 0.4 }}
+          >
+            Portraits
+          </a>
+        </li>
       </ul>
     </nav>
   );
