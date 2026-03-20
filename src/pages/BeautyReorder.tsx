@@ -24,6 +24,10 @@ export default function BeautyReorder() {
     dragOverIndex.current = null;
   };
 
+  const handleRemove = (i: number) => {
+    setImages(prev => prev.filter((_, idx) => idx !== i));
+  };
+
   const handleCopy = () => {
     const text = images.map(url => `      "${url}",`).join("\n");
     navigator.clipboard.writeText(text).then(() => {
@@ -37,7 +41,7 @@ export default function BeautyReorder() {
       <div className="max-w-5xl mx-auto">
         <h1 className="font-display text-3xl uppercase tracking-widest mb-2">Reorder Beauty Images</h1>
         <p className="font-sans text-xs tracking-widest uppercase text-neutral-400 mb-8">
-          Drag images into the order you want, then click "Copy New Order" and paste it in the chat.
+          Drag to reorder · Click <strong>✕</strong> to remove · Then copy and paste into chat.
         </p>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mb-10">
@@ -60,6 +64,13 @@ export default function BeautyReorder() {
               <div className="absolute top-2 left-2 bg-black/70 text-white font-sans text-[0.6rem] tracking-widest px-2 py-0.5 uppercase">
                 {i + 1}
               </div>
+              <button
+                onClick={() => handleRemove(i)}
+                className="absolute top-2 right-2 w-6 h-6 bg-red-600 text-white text-xs flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-700 z-10"
+                title="Remove"
+              >
+                ✕
+              </button>
               <div className="absolute inset-0 border-2 border-transparent group-hover:border-black transition-colors pointer-events-none" />
             </div>
           ))}
