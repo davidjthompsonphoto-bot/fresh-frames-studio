@@ -45,7 +45,7 @@ export default function Contact() {
               </div>
 
               <div>
-                <h3 className="font-display text-2xl tracking-widest text-white mb-3">AGENTS</h3>
+                <h3 className="font-display text-2xl font-bold tracking-widest text-white mb-3">AGENTS</h3>
                 <div className="space-y-3">
                   <div>
                     <p className="font-sans text-[0.6rem] tracking-[0.2em] uppercase text-white/50">UK</p>
