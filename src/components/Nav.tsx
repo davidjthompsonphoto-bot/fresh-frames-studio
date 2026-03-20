@@ -9,7 +9,7 @@ const getOpacity = (pathname: string, to: string) =>
   pathname === to || (to !== "/" && pathname.startsWith(to)) ? 1 : 0.4;
 
 const linkClass =
-  "font-sans text-[0.75rem] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase transition-colors duration-150 hover:text-[hsl(0,100%,50%)] hover:opacity-100";
+  "font-sans text-[0.75rem] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase transition-opacity duration-150 hover:opacity-100";
 
 export default function Nav() {
   const { pathname } = useLocation();
