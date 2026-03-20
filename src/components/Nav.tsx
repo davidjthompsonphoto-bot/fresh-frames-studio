@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const WORK_DROPDOWN = [
   { to: "/work/beauty", label: "Beauty" },
@@ -46,6 +46,27 @@ export default function Nav() {
   const [workHovered, setWorkHovered] = useState(false);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [nameHovered, setNameHovered] = useState(false);
+  const dropdownRef = useRef<HTMLLIElement>(null);
+
+  // Close dropdown on route change (handles mobile tap navigation)
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  // Close dropdown when tapping outside on mobile
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent | TouchEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
+  }, []);
 
   const handleMouseEnter = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -73,6 +94,7 @@ export default function Nav() {
       <ul className="flex gap-4 sm:gap-8">
         {/* Work with dropdown */}
         <li
+          ref={dropdownRef}
           className="relative"
           onMouseEnter={() => { handleMouseEnter(); setWorkHovered(true); }}
           onMouseLeave={() => { handleMouseLeave(); setWorkHovered(false); }}
