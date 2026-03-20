@@ -8,13 +8,44 @@ const WORK_DROPDOWN = [
 const getOpacity = (pathname: string, to: string) =>
   pathname === to || (to !== "/" && pathname.startsWith(to)) ? 1 : 0.4;
 
-const linkClass =
-  "font-sans text-[0.75rem] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase transition-opacity duration-150 hover:opacity-100";
+function NavLink({ to, children, baseOpacity }: { to: string; children: React.ReactNode; baseOpacity: number }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <Link
+      to={to}
+      className="font-sans text-[0.75rem] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase transition-opacity duration-150"
+      style={{ opacity: hovered ? 1 : baseOpacity }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {children}
+    </Link>
+  );
+}
+
+function ExternalNavLink({ href, children }: { href: string; children: React.ReactNode }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="font-sans text-[0.75rem] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase transition-opacity duration-150"
+      style={{ opacity: hovered ? 1 : 0.4 }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {children}
+    </a>
+  );
+}
 
 export default function Nav() {
   const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
+  const [workHovered, setWorkHovered] = useState(false);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [nameHovered, setNameHovered] = useState(false);
 
   const handleMouseEnter = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -32,7 +63,10 @@ export default function Nav() {
     >
       <Link
         to="/"
-        className="font-display text-sm sm:text-base font-bold tracking-[0.12em] uppercase transition-opacity duration-150 hover:opacity-100 leading-tight"
+        className="font-display text-sm sm:text-base font-bold tracking-[0.12em] uppercase transition-opacity duration-150 leading-tight"
+        style={{ opacity: nameHovered ? 1 : 0.4 }}
+        onMouseEnter={() => setNameHovered(true)}
+        onMouseLeave={() => setNameHovered(false)}
       >
         David Thompson
       </Link>
@@ -40,13 +74,13 @@ export default function Nav() {
         {/* Work with dropdown */}
         <li
           className="relative"
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
+          onMouseEnter={() => { handleMouseEnter(); setWorkHovered(true); }}
+          onMouseLeave={() => { handleMouseLeave(); setWorkHovered(false); }}
         >
           <Link
             to="/work"
-            className={linkClass}
-            style={{ opacity: getOpacity(pathname, "/work") }}
+            className="font-sans text-[0.75rem] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase transition-opacity duration-150"
+            style={{ opacity: workHovered ? 1 : getOpacity(pathname, "/work") }}
           >
             Work
           </Link>
@@ -59,14 +93,9 @@ export default function Nav() {
             >
               {WORK_DROPDOWN.map(({ to, label }) => (
                 <li key={to}>
-                  <Link
-                    to={to}
-                    className={linkClass}
-                    style={{ opacity: 0.6 }}
-                    onClick={() => setOpen(false)}
-                  >
-                    {label}
-                  </Link>
+                  <NavLink to={to} baseOpacity={0.6}>
+                    <span onClick={() => setOpen(false)}>{label}</span>
+                  </NavLink>
                 </li>
               ))}
             </ul>
@@ -75,37 +104,17 @@ export default function Nav() {
 
         {/* About */}
         <li>
-          <Link
-            to="/about"
-            className={linkClass}
-            style={{ opacity: getOpacity(pathname, "/about") }}
-          >
-            About
-          </Link>
+          <NavLink to="/about" baseOpacity={getOpacity(pathname, "/about")}>About</NavLink>
         </li>
 
         {/* Contact */}
         <li>
-          <Link
-            to="/contact"
-            className={linkClass}
-            style={{ opacity: getOpacity(pathname, "/contact") }}
-          >
-            Contact
-          </Link>
+          <NavLink to="/contact" baseOpacity={getOpacity(pathname, "/contact")}>Contact</NavLink>
         </li>
 
         {/* Portraits - external */}
         <li>
-          <a
-            href="https://davidthompsonportraits.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={linkClass}
-            style={{ opacity: 0.4 }}
-          >
-            Portraits
-          </a>
+          <ExternalNavLink href="https://davidthompsonportraits.com/">Portraits</ExternalNavLink>
         </li>
       </ul>
     </nav>
