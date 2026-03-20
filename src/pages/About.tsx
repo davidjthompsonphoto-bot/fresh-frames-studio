@@ -53,23 +53,23 @@ export default function About() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.15 }}
           >
-            <p className="font-serif text-lg leading-relaxed text-white">
+            <p className="font-sans text-lg leading-relaxed text-white">
               David Thompson literally grew up with a camera in his hand, as his father was a keen amateur photographer and encouraged his interest from an early age.
             </p>
-            <p className="font-serif text-lg leading-relaxed text-white">
+            <p className="font-sans text-lg leading-relaxed text-white">
               Since graduating from art school, he has travelled the world working as a specialist studio photographer, known for his timeless, clean, beautifully lit and produced imagery. His work has featured across various publications including numerous international editions of Vogue and The New York Times Magazine, and is held in the permanent collection of The National Portrait Gallery.
             </p>
 
             <div>
               <h3 className="font-display text-2xl tracking-widest text-white mb-3">MAGAZINE CREDITS</h3>
-              <p className="font-serif text-lg leading-relaxed text-white/80">
+              <p className="font-sans text-lg leading-relaxed text-white/80">
                 Vogue Germany, Vogue Japan, Vogue Brazil, Vogue China, Vogue Hellas, Vogue Mexico, Vogue Gioello, Vogue Italia, Myself (Condé Nast) Italy, Easy Living (Condé Nast) UK, Brides (Condé Nast) UK, The Rake (International Edition), French Marie-Claire, Spanish Marie-Claire, Japanese Marie-Claire, Italian Amica, Jalouse (France), West-East (Hong Kong), InStyle UK, The National (Dubai), Glamour Mexico, RED UK, Elle Sweden, Donna, New York Times Sunday Magazine
               </p>
             </div>
 
             <div>
               <h3 className="font-display text-2xl tracking-widest text-white mb-3">CLIENT CREDITS</h3>
-              <p className="font-serif text-lg leading-relaxed text-white/80">
+              <p className="font-sans text-lg leading-relaxed text-white/80">
                 Adidas, Swarovski, L'Oreal, Wella, EMI, Hirsh Jewellery, Marks & Spencer, The White Company, Random House, Lara Bohinc, The Royal Family of Jordan
               </p>
             </div>

@@ -38,7 +38,7 @@ export default function Contact() {
                 <h3 className="font-display text-2xl tracking-widest text-white mb-2">EMAIL</h3>
                 <a
                   href="mailto:thompson@mail.com"
-                  className="font-serif italic text-lg text-white/70 hover:text-white transition-colors"
+                  className="font-sans text-lg text-white/70 hover:text-white transition-colors"
                 >
                   thompson@mail.com
                 </a>
@@ -49,19 +49,19 @@ export default function Contact() {
                 <div className="space-y-3">
                   <div>
                     <p className="font-sans text-[0.6rem] tracking-[0.2em] uppercase text-white/50">UK</p>
-                    <a href="mailto:thompson@mail.com" className="font-serif italic text-base text-white/70 hover:text-white transition-colors">
+                    <a href="mailto:thompson@mail.com" className="font-sans text-base text-white/70 hover:text-white transition-colors">
                       Direct
                     </a>
                   </div>
                   <div>
                     <p className="font-sans text-[0.6rem] tracking-[0.2em] uppercase text-white/50">Italy</p>
-                    <a href="mailto:vittoria@photogroupservice.com" className="font-serif italic text-base text-white/70 hover:text-white transition-colors">
+                    <a href="mailto:vittoria@photogroupservice.com" className="font-sans text-base text-white/70 hover:text-white transition-colors">
                       Photogroup Service
                     </a>
                   </div>
                   <div>
                     <p className="font-sans text-[0.6rem] tracking-[0.2em] uppercase text-white/50">Spain</p>
-                    <a href="mailto:info@davidecampi.com" className="font-serif italic text-base text-white/70 hover:text-white transition-colors">
+                    <a href="mailto:info@davidecampi.com" className="font-sans text-base text-white/70 hover:text-white transition-colors">
                       Davide Campi Artist Representatives
                     </a>
                   </div>
