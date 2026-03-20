@@ -13,7 +13,7 @@ export default function Contact() {
         style={{ zIndex: 0 }}
       />
       {/* Subtle dark overlay for text legibility */}
-      <div className="fixed inset-0 bg-black/30" style={{ zIndex: 1 }} />
+      
 
       <div className="relative" style={{ zIndex: 2 }}>
         <Nav />
