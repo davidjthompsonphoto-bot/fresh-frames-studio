@@ -38,7 +38,6 @@ export default function PortfolioDetail() {
   if (!portfolio) {
     return (
       <div className="bg-background min-h-screen">
-        <Nav />
         <div className="pt-32 px-8">
           <p className="font-sans text-sm text-muted-foreground">Series not found.</p>
           <Link to="/" className="font-sans text-xs tracking-widest uppercase underline mt-4 inline-block">← Back</Link>
@@ -60,7 +59,6 @@ export default function PortfolioDetail() {
         ogType="article"
         jsonLd={jsonLd ?? undefined}
       />
-      <Nav />
 
       {/* Lightbox */}
       <AnimatePresence>
