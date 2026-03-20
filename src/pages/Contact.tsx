@@ -66,19 +66,19 @@ export default function Contact() {
                 <h3 className="font-display text-2xl font-bold tracking-widest text-white mb-3">AGENTS</h3>
                 <div className="space-y-3">
                   <div>
-                    <p className="font-sans text-[0.6rem] tracking-[0.2em] uppercase text-white/50">UK</p>
+                    <p className="font-sans text-[0.9rem] sm:text-[0.6rem] tracking-[0.2em] uppercase text-white/50">UK</p>
                     <a href="mailto:thompson@mail.com" className="font-sans text-base text-white/70 hover:text-white transition-colors">
                       Direct
                     </a>
                   </div>
                   <div>
-                    <p className="font-sans text-[0.6rem] tracking-[0.2em] uppercase text-white/50">Italy</p>
+                    <p className="font-sans text-[0.9rem] sm:text-[0.6rem] tracking-[0.2em] uppercase text-white/50">Italy</p>
                     <a href="mailto:vittoria@photogroupservice.com" className="font-sans text-base text-white/70 hover:text-white transition-colors">
                       Photogroup Service
                     </a>
                   </div>
                   <div>
-                    <p className="font-sans text-[0.6rem] tracking-[0.2em] uppercase text-white/50">Spain</p>
+                    <p className="font-sans text-[0.9rem] sm:text-[0.6rem] tracking-[0.2em] uppercase text-white/50">Spain</p>
                     <a href="mailto:info@davidecampi.com" className="font-sans text-base text-white/70 hover:text-white transition-colors">
                       Davide Campi Artist Representatives
                     </a>
