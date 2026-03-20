@@ -1,9 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
+import { useState, useRef } from "react";
 
-const NAV_LINKS = [
-  { to: "/work", label: "Work" },
-  { to: "/about", label: "About" },
-  { to: "/contact", label: "Contact" },
+const WORK_DROPDOWN = [
+  { to: "/work/beauty", label: "Beauty" },
 ];
 
 const getOpacity = (pathname: string, to: string) =>
@@ -11,6 +10,17 @@ const getOpacity = (pathname: string, to: string) =>
 
 export default function Nav() {
   const { pathname } = useLocation();
+  const [open, setOpen] = useState(false);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const handleMouseEnter = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => setOpen(false), 120);
+  };
 
   return (
     <nav
@@ -24,17 +34,63 @@ export default function Nav() {
         David Thompson
       </Link>
       <ul className="flex gap-4 sm:gap-8">
-        {NAV_LINKS.map(({ to, label }) => (
-          <li key={to}>
-            <Link
-              to={to}
-              className="font-sans text-[0.65rem] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase hover:opacity-60"
-              style={{ opacity: getOpacity(pathname, to) }}
+        {/* Work with dropdown */}
+        <li
+          className="relative"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          <Link
+            to="/work"
+            className="font-sans text-[0.65rem] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase hover:opacity-60"
+            style={{ opacity: getOpacity(pathname, "/work") }}
+          >
+            Work
+          </Link>
+
+          {open && (
+            <ul
+              className="absolute top-full left-0 mt-3 flex flex-col gap-3 min-w-[7rem]"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
             >
-              {label}
-            </Link>
-          </li>
-        ))}
+              {WORK_DROPDOWN.map(({ to, label }) => (
+                <li key={to}>
+                  <Link
+                    to={to}
+                    className="font-sans text-[0.6rem] tracking-[0.2em] uppercase hover:opacity-100 transition-opacity"
+                    style={{ opacity: 0.6 }}
+                    onClick={() => setOpen(false)}
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
+        </li>
+
+        {/* About */}
+        <li>
+          <Link
+            to="/about"
+            className="font-sans text-[0.65rem] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase hover:opacity-60"
+            style={{ opacity: getOpacity(pathname, "/about") }}
+          >
+            About
+          </Link>
+        </li>
+
+        {/* Contact */}
+        <li>
+          <Link
+            to="/contact"
+            className="font-sans text-[0.65rem] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase hover:opacity-60"
+            style={{ opacity: getOpacity(pathname, "/contact") }}
+          >
+            Contact
+          </Link>
+        </li>
       </ul>
     </nav>
   );
