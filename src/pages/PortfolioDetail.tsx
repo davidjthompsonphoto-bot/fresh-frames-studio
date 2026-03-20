@@ -74,7 +74,7 @@ export default function PortfolioDetail() {
             onClick={() => setLightbox(null)}
           >
             <button
-              className="absolute top-6 right-8 font-sans text-[0.6rem] tracking-[0.25em] uppercase text-foreground opacity-50 hover:opacity-100 transition-opacity"
+              className="absolute top-6 right-8 font-sans text-[0.9rem] sm:text-[0.6rem] tracking-[0.25em] uppercase text-foreground opacity-50 hover:opacity-100 transition-opacity"
               onClick={() => setLightbox(null)}
             >
               Close
