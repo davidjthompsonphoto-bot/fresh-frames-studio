@@ -105,7 +105,7 @@ export default function PortfolioDetail() {
             {portfolio.title}
           </h2>
           {portfolio.caption && (
-            <p className="font-sans text-[clamp(1rem,1.6vw,1.35rem)] text-foreground/70 mt-3 ml-1 tracking-widest uppercase">
+            <p className="font-sans text-[clamp(0.5rem,0.8vw,0.675rem)] text-foreground/70 mt-3 ml-1 tracking-widest uppercase">
               {portfolio.caption}
             </p>
           )}
