@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
+import type React from "react";
 
 const WORK_DROPDOWN = [
   { to: "/work/beauty", label: "Beauty" },
