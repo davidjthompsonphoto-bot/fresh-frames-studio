@@ -33,7 +33,7 @@ export default function About() {
         style={{ zIndex: 0 }}
       />
       {/* Dark overlay for text legibility */}
-      <div className="fixed inset-0 bg-black/50" style={{ zIndex: 1 }} />
+      
 
       <div className="relative" style={{ zIndex: 2 }}>
         <Nav />
