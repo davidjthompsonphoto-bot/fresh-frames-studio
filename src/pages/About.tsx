@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { motion, useAnimationControls } from "framer-motion";
+import { useEffect } from "react";
 import Nav from "@/components/Nav";
 import SEO from "@/components/SEO";
 import aboutFullbleed from "@/assets/about-fullbleed.jpg";
