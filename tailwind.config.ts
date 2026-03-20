@@ -61,7 +61,7 @@ export default {
       fontFamily: {
         display: ["'Bodoni Moda'", "serif"],
         serif: ["'Cormorant Garamond'", "serif"],
-        sans: ["'Montserrat'", "sans-serif"],
+        sans: ["'Jost'", "sans-serif"],
       },
       borderRadius: {
         lg: "var(--radius)",
