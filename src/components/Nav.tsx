@@ -102,7 +102,7 @@ export default function Nav() {
           <Link
             to="/work"
             className="font-sans text-[0.75rem] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase transition-opacity duration-150"
-            style={{ opacity: workHovered ? 1 : getOpacity(pathname, "/work") }}
+            style={{ opacity: workHovered ? 1 : getOpacity(pathname, "/work"), WebkitTouchCallout: "none" } as React.CSSProperties}
             onClick={() => setOpen(false)}
           >
             Work
