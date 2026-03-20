@@ -1,10 +1,28 @@
 import { motion } from "framer-motion";
 import Nav from "@/components/Nav";
+import SEO from "@/components/SEO";
 import contactFullbleed from "@/assets/contact-fullbleed.jpg";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "@id": "https://davidthompsonphotography.com/contact#webpage",
+  "url": "https://davidthompsonphotography.com/contact",
+  "name": "Contact — David Thompson Photography",
+  "description": "Commission David Thompson for fashion, beauty, bridal or luxury advertising photography. Based in London, available for international work.",
+  "isPartOf": { "@id": "https://davidthompsonphotography.com/#website" },
+  "about": { "@id": "https://davidthompsonphotography.com/#person" },
+};
 
 export default function Contact() {
   return (
     <div className="relative min-h-screen">
+      <SEO
+        title="Contact — David Thompson Photography"
+        description="Commission David Thompson for fashion, beauty, bridal or luxury advertising photography. Based in London, available for international commissions."
+        canonicalPath="/contact"
+        jsonLd={jsonLd}
+      />
       {/* Full bleed background image */}
       <img
         src={contactFullbleed}
