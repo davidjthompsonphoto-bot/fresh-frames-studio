@@ -8,6 +8,9 @@ const WORK_DROPDOWN = [
 const getOpacity = (pathname: string, to: string) =>
   pathname === to || (to !== "/" && pathname.startsWith(to)) ? 1 : 0.4;
 
+const linkClass =
+  "font-sans text-[0.75rem] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase transition-colors duration-150 hover:text-[hsl(0,100%,50%)] hover:opacity-100";
+
 export default function Nav() {
   const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
@@ -29,7 +32,7 @@ export default function Nav() {
     >
       <Link
         to="/"
-        className="font-display text-sm sm:text-base font-bold tracking-[0.12em] uppercase hover:opacity-60 transition-opacity leading-tight"
+        className="font-display text-sm sm:text-base font-bold tracking-[0.12em] uppercase transition-colors duration-150 hover:text-[hsl(0,100%,50%)] hover:opacity-100 leading-tight"
       >
         David Thompson
       </Link>
@@ -42,7 +45,7 @@ export default function Nav() {
         >
           <Link
             to="/work"
-            className="font-sans text-[0.75rem] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase hover:opacity-60"
+            className={linkClass}
             style={{ opacity: getOpacity(pathname, "/work") }}
           >
             Work
@@ -58,7 +61,7 @@ export default function Nav() {
                 <li key={to}>
                   <Link
                     to={to}
-                    className="font-sans text-[0.75rem] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase hover:opacity-100 transition-opacity"
+                    className={linkClass}
                     style={{ opacity: 0.6 }}
                     onClick={() => setOpen(false)}
                   >
@@ -74,7 +77,7 @@ export default function Nav() {
         <li>
           <Link
             to="/about"
-            className="font-sans text-[0.75rem] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase hover:opacity-60"
+            className={linkClass}
             style={{ opacity: getOpacity(pathname, "/about") }}
           >
             About
@@ -85,7 +88,7 @@ export default function Nav() {
         <li>
           <Link
             to="/contact"
-            className="font-sans text-[0.75rem] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase hover:opacity-60"
+            className={linkClass}
             style={{ opacity: getOpacity(pathname, "/contact") }}
           >
             Contact
@@ -98,7 +101,7 @@ export default function Nav() {
             href="https://davidthompsonportraits.com/"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-sans text-[0.75rem] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase hover:opacity-60"
+            className={linkClass}
             style={{ opacity: 0.4 }}
           >
             Portraits
