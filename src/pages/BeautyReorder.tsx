@@ -64,6 +64,13 @@ export default function BeautyReorder() {
               <div className="absolute top-2 left-2 bg-black/70 text-white font-sans text-[0.6rem] tracking-widest px-2 py-0.5 uppercase">
                 {i + 1}
               </div>
+              <button
+                onClick={() => handleRemove(i)}
+                className="absolute top-2 right-2 w-6 h-6 bg-red-600 text-white text-xs flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-700 z-10"
+                title="Remove"
+              >
+                ✕
+              </button>
               <div className="absolute inset-0 border-2 border-transparent group-hover:border-black transition-colors pointer-events-none" />
             </div>
           ))}
