@@ -1,10 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import type React from "react";
-
-const WORK_DROPDOWN = [
-  { to: "/work/beauty", label: "Beauty" },
-];
 
 const getOpacity = (pathname: string, to: string) =>
   pathname === to || (to !== "/" && pathname.startsWith(to)) ? 1 : 0.4;
@@ -43,40 +39,7 @@ function ExternalNavLink({ href, children }: { href: string; children: React.Rea
 
 export default function Nav() {
   const { pathname } = useLocation();
-  const [open, setOpen] = useState(false);
-  const [workHovered, setWorkHovered] = useState(false);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [nameHovered, setNameHovered] = useState(false);
-  const dropdownRef = useRef<HTMLLIElement>(null);
-
-  // Close dropdown on route change (handles mobile tap navigation)
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
-
-  // Close dropdown when tapping outside on mobile
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent | TouchEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    document.addEventListener("touchstart", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("touchstart", handleClickOutside);
-    };
-  }, []);
-
-  const handleMouseEnter = () => {
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    setOpen(true);
-  };
-
-  const handleMouseLeave = () => {
-    timeoutRef.current = setTimeout(() => setOpen(false), 120);
-  };
 
   return (
     <nav
@@ -93,37 +56,9 @@ export default function Nav() {
         David Thompson
       </Link>
       <ul className="flex gap-4 sm:gap-8">
-        {/* Work with dropdown */}
-        <li
-          ref={dropdownRef}
-          className="relative"
-          onMouseEnter={() => { handleMouseEnter(); setWorkHovered(true); }}
-          onMouseLeave={() => { handleMouseLeave(); setWorkHovered(false); }}
-        >
-          <Link
-            to="/work"
-            className="font-sans text-[0.75rem] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase transition-opacity duration-150"
-            style={{ opacity: workHovered ? 1 : getOpacity(pathname, "/work"), WebkitTouchCallout: "none" } as React.CSSProperties}
-            onClick={() => setOpen(false)}
-          >
-            Work
-          </Link>
-
-          {open && (
-            <ul
-              className="absolute top-full left-0 mt-3 flex flex-col gap-3 min-w-[7rem]"
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-            >
-              {WORK_DROPDOWN.map(({ to, label }) => (
-                <li key={to}>
-                  <NavLink to={to} baseOpacity={0.6}>
-                    <span onClick={() => setOpen(false)}>{label}</span>
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
-          )}
+        {/* Work */}
+        <li>
+          <NavLink to="/work" baseOpacity={getOpacity(pathname, "/work")}>Work</NavLink>
         </li>
 
         {/* About */}
