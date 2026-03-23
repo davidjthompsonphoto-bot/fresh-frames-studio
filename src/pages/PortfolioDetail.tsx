@@ -110,7 +110,7 @@ export default function PortfolioDetail() {
         </motion.div>
 
         {/* Navigation */}
-        <div className="flex flex-col sm:flex-row sm:justify-between gap-6 mb-10 pb-8 border-b border-border px-8">
+        <div className="flex flex-col sm:flex-row sm:justify-between gap-6 mb-10 pb-8 px-8">
           {prev ? (
             <Link to={`/work/${prev.slug}`} className="group flex flex-col gap-1">
               <span className="font-sans text-[0.825rem] sm:text-[0.55rem] tracking-[0.2em] uppercase text-foreground opacity-40 group-hover:opacity-100 transition-opacity">← Previous</span>
